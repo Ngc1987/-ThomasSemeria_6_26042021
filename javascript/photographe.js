@@ -1,6 +1,5 @@
-
+// ******************LIGHTBOX***************************************
 // Selecting all required elements
-
 const gallery = document.querySelectorAll(".gallery__sample img"),
 previewBox = document.querySelector(".preview-box"),
 previewImg = previewBox.querySelector("img")
@@ -83,22 +82,6 @@ window.onload = () => {  // Une fois la fenêtre chargée
     }
 
 }
-
-
-
-// ****************** BOUTON CONTACT *************************************
-// const contactBtn = document.querySelector(".contact");
-// const modal = document.querySelector(".modal");
-// const closeBtn = document.querySelector(".modal__head__close");
-
-// contactBtn.onclick = () => {
-//     modal.style.display = "block";
-// }
-
-// closeBtn.onclick = () => {
-    
-//     modal.style.display = "none";
-// }
 
 // ****************** BOUTON SUBMIT **************************************
 const submitBtn = document.querySelector("#submit");
@@ -232,4 +215,15 @@ triggers.forEach((trigger) => {
   }); 
 });
 
+// ********************** COMPTEUR J'AIME ********************************
+const like = document.querySelectorAll(".gallery__sample__descript__like");
+const likes = [like];
+like.onclick = function() {
+    
+    likes.forEach(like => {
+        like.value = like.value + 1;
+    });
+    
+}
 
+console.log(like.textcontent);

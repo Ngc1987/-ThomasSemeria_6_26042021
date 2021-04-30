@@ -140,6 +140,7 @@ header {
             border-radius: 50%;
             object-fit: cover;
             transition: all 0.3s ease;
+            cursor: pointer;
 
             &:hover {
                 transform: scale(1.08);
@@ -150,6 +151,8 @@ header {
             color: $secondary;
             font-size: 36px;
             margin-top: 20px;
+            font-weight: 400;
+            cursor: pointer;
         }
     }
 
@@ -607,7 +610,6 @@ header {
     transition: all 0.4s ease;
     animation-name: modalopen;
     animation-duration: 0.7s;
-    overflow-y: scroll;
 
     &__box {
         display: flex;
