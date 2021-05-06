@@ -40,13 +40,18 @@
 
         </div>
 
-        <div class="sortMenu">
-            <label for="sortPhoto">Trier par</label>
-            <select name="sort" id="sortPhoto">
-                <option value="popularite">Popularité</option>
-                <option value="date">Date</option>
-                <option value="titre">Titre</option>
-            </select>
+        <div class="sortWrapper">
+            <p>Trier par</p>
+            <div class="sortWrapper__select">
+                <div class="sortWrapper__select--trigger"><span>Popularité</span>
+                    <div class="arrow"></div>
+                </div>
+                <div class="sortWrapper__options">
+                    <span class="sortWrapper__options--value selected" data-value="popularite">Popularité</span>
+                    <span class="sortWrapper__options--value" data-value="date">Date</span>
+                    <span class="sortWrapper__options--value" data-value="titre">Titre</span>
+                </div>
+            </div>
         </div>
 
         <div class="gallery">
@@ -58,7 +63,8 @@
                 <div class="gallery__sample__descript">
                     <div class="gallery__sample__descript__name">Solitude</div>
                     <div class="gallery__sample__descript__price">70 €</div>
-                    <div class="gallery__sample__descript__like">12 <i class="fas fa-heart"></i></div>
+                    <div class="gallery__sample__descript__like unliked">12</div>
+                    <i class="fas fa-heart"></i>
 
                 </div>
             </article>
@@ -133,13 +139,8 @@
         </div>
 
 
-        <div class="preview-box">:
-            <!-- <div class="details"> -->
-                <!-- <span class="title">
-                    Image <p class="current-img"></p>
-                    sur <p class="total-img"></p>
-                </span> -->
-            <!-- </div> -->
+        <div class="preview-box">
+            
             <div class="imgBox">
                 <div class="imgBox__slide prev">
                     <i class="fas fa-chevron-left"></i>
@@ -215,6 +216,9 @@
 
     </div> -->
 
-    <script src="javascript/photographe.js"></script>
+    <script src="javascript/likeButton.js"></script>
+    <script src="javascript/lightbox.js"></script>
+    <script src="javascript/modale.js"></script>
+    <script src="javascript/boutonTriPhotos.js"></script>
 </body>
 </html>
