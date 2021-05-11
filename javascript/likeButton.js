@@ -1,7 +1,8 @@
 // ***********************************************************************
 // ********************** COMPTEUR J'AIME ********************************
 // ***********************************************************************
-const like = document.querySelectorAll(".gallery__sample__descript__like");
+const like = document.querySelectorAll(".gallery__sample__descript--like");
+
 // const likes = [like];
     
     like.forEach(like => {
@@ -11,28 +12,32 @@ const like = document.querySelectorAll(".gallery__sample__descript__like");
         // liked = true
         // liked =! liked;
 
-
+        // this.classList.contains
         // function classToggle() {
           this.classList.toggle('liked');
           this.classList.toggle('unliked');
+
+          if(this.classList.contains("liked")) {
+            like.innerText ++ ;
+            // liked = true;
+            like.classList.add("liked");
+            like.classList.remove("unliked");
+            nextElementSibling.classList.add("liked");
+            nextElementSibling.classList.remove("unliked");
+            
+            
+  
+          } else if (this.classList.contains("unliked")) {
+            like.innerText --;
+            // liked = false;
+            like.classList.add("unliked");
+            like.classList.remove("liked");
+            nextElementSibling.classList.add("unliked");
+            nextElementSibling.classList.remove("liked");
       }
       // document.querySelector('#div').addEventListener('click', classToggle);
       
-        if(this.className == "liked") {
-          // like.innerText += 1 ;
-          // liked = true;
-          like.classList.add("liked");
-          like.classList.remove("unliked");
-          like.style.fontSize = "20px";
-          
-          
-
-        } else if (this.className == "unliked") {
-          like.innerText --;
-          // liked = false;
-          like.classList.add("unliked");
-          like.classList.remove("liked");
-          like.style.fontSize = "30px";
+        
 
 
           // switch (this.classList) {

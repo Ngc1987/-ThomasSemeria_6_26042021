@@ -114,19 +114,6 @@ function showPhotographers(photographData) {
         const photographeList = document.querySelectorAll(".photographItem");
         console.log(tagFilter);
 
-        // Array.from(photographeList).forEach(function(photographe) {
-
-        //   const photographTag = photographe.lastElementChild.childNodes;
-        //   const photographTagFormat = photographTag[0].innerText.toLowerCase().substring(1);
-        //   console.log(photographTag[0]);
-        //   if(photographTagFormat.indexOf(tagFilter) != -1) {
-        //     photographe.style.display = "block";
-        //   } else {
-        //     photographe.style.display = "none";
-        //   }
-        // })
-
-
 
         Array.from(photographeList).forEach(function(photographe) {
 
@@ -140,6 +127,7 @@ function showPhotographers(photographData) {
               if(photographTagFormat.indexOf(tagFilter) !== -1) {
                 photographe.style.display = "block";
                 console.log(photographTagFormat);
+                break;
 
               } else {
                 photographe.style.display = "none";

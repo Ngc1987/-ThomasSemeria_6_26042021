@@ -512,21 +512,21 @@ header {
             align-items: center;
             margin-top: 5px;
                 
-            &__name {
+            &--name {
                 flex-grow: 3;
                 font-weight: 400;
                 color: $primary;
                 font-size: 24px;
             }
 
-            &__price {
+            &--price {
                 font-weight: 500;
                 color: $primary;
                 font-size: 24px;
                 margin-right: 15px;
             }
 
-            &__like {
+            &--like {
                 font-weight: 500;
                 font-size: 24px;
                 color: $primary;
@@ -534,16 +534,24 @@ header {
                 align-self: flex-end;
             }
 
-            .unliked {
-                color: blue;
-            }
+            
 
-            .liked {
-                color: red;
+            &--heart {
+                color: $primary;
+                font-size: 20px;
+                padding: 0 5px;
             }
 
         }
     }
+}
+
+.unliked {
+    color: $primary;
+}
+
+.liked {
+    color: red;
 }
 
 .likeAndPrice {
