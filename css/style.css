@@ -288,7 +288,7 @@ header #topLink:visited {
   transform: scale(1.1);
 }
 
-@media screen and (max-width: 800px) {
+@media (max-width: 800px) {
   .contact {
     height: 45px;
     position: absolute;
@@ -477,7 +477,7 @@ header #topLink:visited {
   padding: 0 5px;
 }
 
-@media screen and (max-width: 1200px) {
+@media (max-width: 1200px) {
   .gallery {
     justify-content: space-evenly;
   }
@@ -490,6 +490,18 @@ header #topLink:visited {
   color: red;
 }
 
+.likedHeart {
+  animation: likedHeart 2s ease 1 forwards;
+}
+
+@keyframes likedHeart {
+  10% {
+    color: red;
+  }
+  100% {
+    color: #911c1c;
+  }
+}
 .likeAndPrice {
   display: flex;
   flex-direction: row;

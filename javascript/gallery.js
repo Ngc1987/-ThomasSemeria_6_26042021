@@ -319,13 +319,17 @@ function liking() {
         if(this.classList.contains("liked")) {
             like.innerText ++ ;
             like.classList.add("liked");
+            like.nextElementSibling.classList.add("likedHeart");
             like.classList.remove("unliked");
     
         } else if (this.classList.contains("unliked")) {
             like.innerText --;
             like.classList.add("unliked");
+            like.nextElementSibling.classList.remove("likedHeart");
             like.classList.remove("liked");
         }
+
+        console.log(like.nextElementSibling);
 
         showTotalLikesAndPrice();
         }
@@ -343,7 +347,7 @@ function showTotalLikesAndPrice() {
         for(like = 0; like < likes.length; like++){
 
             let likeValue = parseInt(likes[like].textContent);
-            console.log(likeValue);
+            // console.log(likeValue);
         
             sum = sum + likeValue;
     }
