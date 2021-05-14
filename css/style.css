@@ -81,6 +81,7 @@ header #topLink:visited {
 }
 
 .hide {
+  display: none;
   top: -35px;
   opacity: 0;
   transition: all 0.4s ease;
@@ -106,6 +107,7 @@ header #topLink:visited {
   width: 350px;
   display: flex;
   flex-direction: column;
+  align-items: center;
   margin-top: 45px;
   cursor: initial;
 }
@@ -114,9 +116,15 @@ header #topLink:visited {
   flex-direction: column;
   align-items: center;
 }
+.photographItem__id a {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
 .photographItem__id__photo {
   display: flex;
   flex-direction: column;
+  align-items: center;
   width: 200px;
   height: 200px;
   border-radius: 50%;
@@ -127,7 +135,8 @@ header #topLink:visited {
   height: 200px;
   border-radius: 50%;
   object-fit: cover;
-  transition: all 0.3s ease;
+  transition: all 0.4s ease;
+  cursor: pointer;
 }
 .photographItem__id__photo img:hover {
   transform: scale(1.08);
@@ -136,6 +145,8 @@ header #topLink:visited {
   color: #d3573c;
   font-size: 36px;
   margin-top: 20px;
+  font-weight: 400;
+  cursor: pointer;
 }
 .photographItem__descript {
   display: flex;
@@ -187,16 +198,16 @@ header #topLink:visited {
 .photographPage__head {
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
+  justify-content: flex-start;
   align-items: center;
   background: #fafafa;
   position: relative;
   height: 310px;
 }
-.photographPage__head a {
-  position: absolute;
-  top: 63px;
-  left: 450px;
+.photographPage__head .contact {
+  align-self: flex-start;
+  margin-top: 60px;
+  margin-left: 20px;
   background: #911c1c;
   color: #fff;
   transition: all 0.3s ease;
@@ -210,11 +221,11 @@ header #topLink:visited {
   font-size: 20px;
   border-radius: 5px;
 }
-.photographPage__head a:hover {
+.photographPage__head .contact:hover {
   background: #d3573c;
   color: #000;
 }
-.photographPage__head a:visited {
+.photographPage__head .contact:visited {
   color: initial;
 }
 .photographPage__head__descript {
@@ -222,20 +233,20 @@ header #topLink:visited {
   flex-direction: column;
   margin-left: 50px;
 }
-.photographPage__head__descript__name {
+.photographPage__head__descript--name {
   font-size: 64px;
   color: #d3573c;
 }
-.photographPage__head__descript__city {
+.photographPage__head__descript--city {
   font-size: 24px;
   color: #911c1c;
 }
-.photographPage__head__descript__phrase {
+.photographPage__head__descript--phrase {
   font-size: 18px;
   color: #525252;
   margin-top: 15px;
 }
-.photographPage__head__descript__tags {
+.photographPage__head__descript--tags {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
@@ -243,7 +254,7 @@ header #topLink:visited {
   align-items: flex-end;
   margin-top: 15px;
 }
-.photographPage__head__descript__tags span {
+.photographPage__head__descript--tags span {
   color: #911c1c;
   font-size: 18px;
   font-weight: bold;
@@ -254,52 +265,139 @@ header #topLink:visited {
   cursor: pointer;
   transition: all 0.3s ease;
 }
-.photographPage__head__descript__tags span:hover {
+.photographPage__head__descript--tags span:hover {
   color: #fff;
   background: #911c1c;
 }
 .photographPage__head__id {
   width: 200px;
   height: 200px;
-  margin-right: 50px;
+  border-radius: 50%;
+  position: absolute;
+  right: 50px;
 }
-.photographPage__head__id__photo {
-  margin-right: 50px;
-}
-.photographPage__head__id__photo img {
+.photographPage__head__id--photo img {
   width: 200px;
   height: 200px;
   object-fit: cover;
   border-radius: 50%;
+  transition: all 0.4s ease;
+}
+.photographPage__head__id--photo img:hover {
+  transform: scale(1.1);
 }
 
-.sortMenu {
+@media screen and (max-width: 800px) {
+  .contact {
+    height: 45px;
+    position: absolute;
+    right: 65px;
+    bottom: 20px;
+  }
+}
+.sortWrapper {
+  position: relative;
+  user-select: none;
+  width: 170px;
+  margin-top: 30px;
+}
+.sortWrapper__select {
+  position: absolute;
+  width: 100%;
+  left: 100px;
+  top: 0px;
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
+  border: 0 2px solid #394a6d;
+  border-radius: 10px;
+}
+.sortWrapper__select--trigger {
+  position: relative;
+  display: flex;
   align-items: center;
-  margin-top: 20px;
-}
-.sortMenu label {
-  font-weight: 700;
-  font-size: 18px;
-}
-.sortMenu select {
-  background: #911c1c;
-  width: 170px;
-  height: 50px;
+  justify-content: space-between;
+  padding: 0 22px;
+  font-size: 20px;
+  font-weight: 400;
   color: #fff;
-  font-size: 18px;
-  font-weight: 700;
-  text-align: center;
-  display: flex;
-  margin-left: 20px;
-  border-radius: 5px;
-}
-.sortMenu select option {
+  height: 60px;
   background: #911c1c;
-  width: 170px;
-  height: 69px;
-  padding: 10px 30px;
+  cursor: pointer;
+  border: 2px 0 solid #911c1c;
+}
+.sortWrapper__options {
+  position: absolute;
+  display: block;
+  top: 100%;
+  left: 0;
+  right: 0;
+  border: 2px solid #911c1c;
+  border-top: 0;
+  background: #911c1c;
+  transition: all 0.5s;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  z-index: 2;
+}
+.sortWrapper__options--value {
+  position: relative;
+  display: block;
+  padding: 0 22px;
+  font-size: 22px;
+  font-weight: 400;
+  color: #fff;
+  line-height: 60px;
+  cursor: pointer;
+  transition: all 0.5s;
+}
+.sortWrapper__options--value:hover {
+  cursor: pointer;
+  background: #d3573c;
+}
+.sortWrapper__options--value.selected {
+  color: #fff;
+  background: #911c1c;
+}
+
+.sortWrapper__select.open .sortWrapper__options {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: all;
+}
+
+.arrow {
+  position: relative;
+  height: 15px;
+  width: 15px;
+}
+.arrow::before, .arrow::after {
+  content: "";
+  position: absolute;
+  bottom: 0px;
+  width: 0.15rem;
+  height: 100%;
+  transition: all 0.5s;
+}
+.arrow::before {
+  left: -5px;
+  transform: rotate(45deg);
+  background: #fff;
+}
+.arrow::after {
+  left: 5px;
+  transform: rotate(-45deg);
+  background: #fff;
+}
+
+.open .arrow::before {
+  left: -5px;
+  transform: rotate(-45deg);
+}
+
+.open .arrow::after {
+  left: 5px;
+  transform: rotate(45deg);
 }
 
 .gallery {
@@ -314,10 +412,21 @@ header #topLink:visited {
   flex-direction: column;
   border-radius: 5px;
   margin-top: 30px;
+  width: 350px;
 }
 .gallery__sample .image {
   height: 300px;
-  overflow: hidden;
+}
+.gallery__sample video {
+  width: 350px;
+  height: 300px;
+  object-fit: cover;
+  border-radius: 5px;
+  transition: all 0.4s ease;
+  cursor: pointer;
+}
+.gallery__sample video:hover {
+  transform: scale(1.03) skewX(3deg) skewY(-3deg) translateY(-15px);
 }
 .gallery__sample img {
   width: 350px;
@@ -325,6 +434,7 @@ header #topLink:visited {
   object-fit: cover;
   border-radius: 5px;
   transition: all 0.4s ease;
+  cursor: pointer;
 }
 .gallery__sample img:hover {
   transform: scale(1.03) skewX(3deg) skewY(-3deg) translateY(-15px);
@@ -334,23 +444,49 @@ header #topLink:visited {
   flex-direction: row;
   align-items: center;
   margin-top: 5px;
-  color: #911c1c;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
-.gallery__sample__descript__name {
+.gallery__sample__descript--name {
   flex-grow: 3;
   font-weight: 400;
+  color: #911c1c;
   font-size: 24px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
-.gallery__sample__descript__price {
+.gallery__sample__descript--price {
   font-weight: 500;
+  color: #911c1c;
   font-size: 24px;
   margin-right: 15px;
 }
-.gallery__sample__descript__like {
+.gallery__sample__descript--like {
   font-weight: 500;
   font-size: 24px;
+  color: #911c1c;
   cursor: pointer;
   align-self: flex-end;
+}
+.gallery__sample__descript--heart {
+  color: #911c1c;
+  font-size: 20px;
+  padding: 0 5px;
+}
+
+@media screen and (max-width: 1200px) {
+  .gallery {
+    justify-content: space-evenly;
+  }
+}
+.unliked {
+  color: #911c1c;
+}
+
+.liked {
+  color: red;
 }
 
 .likeAndPrice {
@@ -383,7 +519,6 @@ header #topLink:visited {
   left: 50%;
   transform: translate(-50%, -50%) scale(0.9);
   background: #fff;
-  padding: 20px 100px;
   border-radius: 5px;
   box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.5);
   opacity: 0;
@@ -398,30 +533,7 @@ header #topLink:visited {
   transition: all 0.4s ease;
 }
 
-.icon {
-  color: #911c1c;
-  cursor: pointer;
-  font-size: 20px;
-  position: absolute;
-  font-size: 35px;
-  font-weight: lighter;
-  right: -40px;
-}
-
-.details .title {
-  display: flex;
-  font-size: 18px;
-}
-
-.details .title p {
-  margin: 0 5px;
-}
-
-.details .title p.current-img {
-  font-weight: 600;
-}
-
-.preview-box .img-box {
+.imgBox {
   display: flex;
   width: 100%;
   height: auto;
@@ -430,8 +542,7 @@ header #topLink:visited {
   object-fit: cover;
   position: relative;
 }
-
-.img-box .slide {
+.imgBox__slide {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
@@ -444,20 +555,29 @@ header #topLink:visited {
   text-align: center;
   z-index: 3;
 }
-
-.img-box .slide.prev {
+.imgBox .prev {
   left: -60px;
 }
-
-.img-box .slide.next {
+.imgBox .next {
   right: -60px;
 }
-
-.preview-box .img-box img {
+.imgBox img {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  border-radius: 0 0 5px 5px;
+}
+.imgBox video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.imgBox__close {
+  color: #911c1c;
+  cursor: pointer;
+  position: absolute;
+  font-size: 35px;
+  font-weight: lighter;
+  right: -40px;
 }
 
 .shadow {
@@ -466,8 +586,104 @@ header #topLink:visited {
   left: 0;
   height: 100%;
   width: 100%;
-  background: rgba(0, 0, 0, 0.8);
+  background: #fff;
   display: none;
+}
+
+.dialog[aria-hidden=true] {
+  visibility: hidden;
+  opacity: 0;
+}
+
+.dialog {
+  min-width: 470px;
+  height: 560px;
+  display: flex;
+  flex-direction: column;
+  background: #db8876;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding: 30px;
+  border-radius: 5px;
+  transition: all 0.4s ease;
+}
+.dialog__box {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+.dialog__box--name, .dialog__box--contact {
+  font-weight: 400;
+  font-size: 45px;
+  margin-top: 20px;
+  line-height: 3px;
+}
+.dialog__box--close {
+  font-size: 30px;
+  width: 40px;
+  height: 40px;
+  background: transparent;
+  font-weight: lighter;
+  position: absolute;
+  top: 0;
+  right: 0;
+  border: none;
+}
+.dialog__box--close i {
+  color: #fff;
+  font-size: 20px;
+  font-weight: lighter;
+  z-index: 20;
+}
+.dialog__box--modal {
+  display: flex;
+  flex-direction: column;
+}
+.dialog__box--modal label {
+  font-size: 25px;
+}
+.dialog__box--modal input {
+  width: 100%;
+  font-size: 20px;
+  height: 40px;
+  border: none;
+  border-radius: 5px;
+  margin-top: -20px;
+}
+.dialog__box--modal textarea {
+  width: 100%;
+  border: none;
+  margin-top: -20px;
+  border-radius: 5px;
+}
+.dialog__box--modal button {
+  width: 170px;
+  height: 70px;
+  font-size: 15px;
+  font-weight: 700;
+  margin-top: 20px;
+  background: #911c1c;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+}
+.dialog__form {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 670px;
+}
+.dialog__form label {
+  font-size: 25px;
+}
+.dialog__form input {
+  width: 100%;
+  font-size: 20px;
+  height: 40px;
+  border: none;
+  border-radius: 5px;
 }
 
 /*# sourceMappingURL=style.css.map */

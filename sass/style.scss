@@ -225,16 +225,20 @@ header {
     &__head {
         display: flex;
         flex-direction: row;
-        justify-content: space-between;
+        justify-content: flex-start;
         align-items: center;
         background: $tertiary;
         position: relative;
         height: 310px;
 
-        .contact button{
-            position: absolute;
-            top: 63px;
-            left: 450px;
+        .contact {
+            // position: absolute;
+            // top: 63px;
+            // right: 400px;
+            // margin-right: 25    0px;
+            align-self: flex-start;
+            margin-top: 60px;
+            margin-left: 20px;
             background: $primary;
             color: #fff;
             transition: all 0.3s ease;
@@ -263,23 +267,23 @@ header {
             flex-direction: column;
             margin-left: 50px;
 
-            &__name {
+            &--name {
                 font-size: 64px;
                 color: $secondary;
             }
 
-            &__city {
+            &--city {
                 font-size: 24px;
                 color: $primary;
             }
 
-            &__phrase {
+            &--phrase {
                 font-size: 18px;
                 color: #525252;
                 margin-top: 15px;
             }
 
-            &__tags {
+            &--tags {
                 display: flex;
                 flex-direction: row;
                 flex-wrap: wrap;
@@ -311,22 +315,38 @@ header {
         &__id {
             width: 200px;
             height: 200px;
-            margin-right: 50px;
+            border-radius: 50%;
+            position: absolute;
+            right: 50px;
 
-            &__photo {
-                margin-right: 50px;
+            &--photo {
+                // margin-right: 30px;
             }
     
-            &__photo img{
+            &--photo img{
                 width: 200px;
                 height: 200px;
                 object-fit: cover;                
                 border-radius: 50%;
+                transition: all 0.4s ease;
+
+                &:hover {
+                    transform: scale(1.1);
+                }
             }
         }
     }
 }
 
+@media screen and (max-width: 800px) {
+    .contact {
+        height: 45px;
+        position: absolute;
+        right: 65px;
+        bottom: 20px;
+    }
+    
+}
 
 .sortWrapper {
     position: relative;
@@ -476,6 +496,8 @@ header {
     
 // }
 
+
+
 .gallery {
     display: flex;
     flex-direction: row;
@@ -483,15 +505,30 @@ header {
     flex-wrap: wrap;
     margin-top: 30px;
 
+
     &__sample {
         display: flex;
         flex-direction: column;
         border-radius: 5px;
         margin-top: 30px;
+        width: 350px;
 
         .image {
             height: 300px;
-            overflow: hidden;
+            // overflow: hidden;    
+        }
+
+        video {
+            width: 350px;
+            height: 300px;
+            object-fit: cover;
+            border-radius: 5px;
+            transition: all 0.4s ease;
+            cursor: pointer;
+
+            &:hover {
+                transform: scale(1.03) skewX(3deg) skewY(-3deg) translateY(-15px);
+            }
         }
 
         img{
@@ -500,6 +537,7 @@ header {
             object-fit: cover;
             border-radius: 5px;
             transition: all 0.4s ease;
+            cursor: pointer;
 
             &:hover {
                 transform: scale(1.03) skewX(3deg) skewY(-3deg) translateY(-15px);
@@ -511,12 +549,18 @@ header {
             flex-direction: row;
             align-items: center;
             margin-top: 5px;
+            white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
                 
             &--name {
                 flex-grow: 3;
                 font-weight: 400;
                 color: $primary;
                 font-size: 24px;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
             }
 
             &--price {
@@ -544,6 +588,12 @@ header {
 
         }
     }
+}
+
+@media screen and (max-width: 1200px) {
+    .gallery {
+    justify-content: space-evenly;
+}
 }
 
 .unliked {
@@ -702,6 +752,12 @@ header {
         object-fit: cover;
         // border-radius: 0 0 5px 5px;
     }
+    video {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        // border-radius: 0 0 5px 5px;
+    }
 
     &__close {
         color: $primary;
@@ -768,6 +824,7 @@ header {
             font-size: 45px;
             margin-top: 20px;
             line-height: 3px;
+            
         }
 
         &--close {

@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.3/css/all.css" integrity="sha384-SZXxX4whJ79/gErwcOYf+zWLeJdY/qpuqC4cAa9rOGUstPomtqpuNWT9wdPEn2fk" crossorigin="anonymous">
+    
     <title>Document</title>
 </head>
 <body>
@@ -22,19 +23,19 @@
             <div class="photographPage__head">
 
                 <div class="photographPage__head__descript">
-                    <div class="photographPage__head__descript__name">Mimi Keel</div>
-                    <div class="photographPage__head__descript__city">London, UK</div>
-                    <div class="photographPage__head__descript__phrase">Voir le beau dans le quotidien</div>
-                    <div class="photographPage__head__descript__tags"><span>#Portrait</span><span>#Art</span><span>#Fashion</span><span>#Portrait</span><span>#Art</span><span>#Fashion</span></div>
+                    <div class="photographPage__head__descript--name">Mimi Keel</div>
+                    <div class="photographPage__head__descript--city">London, UK</div>
+                    <div class="photographPage__head__descript--phrase">Voir le beau dans le quotidien</div>
+                    <div class="photographPage__head__descript--tags"></div>
                 </div>
+                <button class="contact" type="button" aria-haspopup="dialog" aria-controls="dialog">Contactez-moi</button>
+
                 <div class="photographPage__head__id">
-                    <div class="photographPage__head__id__photo">
-                        <img src="images/Photographs/RhodeDubois.jpg" alt="">
+                    <div class="photographPage__head__id--photo">
                     </div>
                 </div>
-                <div class="contact">
-                <button type="button" aria-haspopup="dialog" aria-controls="dialog">Contactez-moi</button>
-                </div>
+                <!-- <div class="contact"> -->
+                <!-- </div> -->
 
             </div>
 
@@ -56,9 +57,9 @@
 
         <div class="gallery">
 
-            <article class="gallery__sample">
+            <!-- <article class="gallery__sample">
 
-                <div classe="image"><img src="images/Mimi/Travel_Lonesome_resultat.jpg" alt=""></div>
+                <div classe="image"><img src="images/photographersImages/Travel_Lonesome.jpg" alt=""></div>
 
                 <div class="gallery__sample__descript">
                     <div class="gallery__sample__descript--name">Solitude</div>
@@ -67,9 +68,9 @@
                     <i class="fas fa-heart gallery__sample__descript--heart unliked"></i>
 
                 </div>
-            </article>
+            </article> -->
 
-            <article class="gallery__sample">
+            <!-- <article class="gallery__sample">
 
                 <div classe="image"><img src="images/Mimi/Portrait_Nora_resultat.jpg" alt=""></div>
 
@@ -119,11 +120,11 @@
                     <i class="fas fa-heart gallery__sample__descript--heart unliked"></i>
 
                 </div>
-            </article>
+            </article> -->
 
-            <article class="gallery__sample">
+            <!-- <article class="gallery__sample">
 
-                <div classe="image"><span><img src="images/Mimi/Travel_Lonesome_resultat.jpg" alt=""></span></div>
+                <div classe="image"><span><img src="images/photographersImages/Travel_Lonesome.jpg" alt=""></span></div>
 
                 <div class="gallery__sample__descript">
                     <div class="gallery__sample__descript--name">Solitude</div>
@@ -132,13 +133,13 @@
                     <i class="fas fa-heart gallery__sample__descript--heart unliked"></i>
 
                 </div>
-            </article>
+            </article> -->
 
         </div>
 
         <div class="likeAndPrice">
-            <div class="likeAndPrice__like">2564 <i class="fas fa-heart"></i></div>
-            <div class="likeAndPrice__price">300€ / jour</div>
+            <div class="likeAndPrice__like">2564</div>
+            <div class="likeAndPrice__price"></div>
 
         </div>
 
@@ -152,8 +153,8 @@
                 <div class="imgBox__slide next">
                     <i class="fas fa-chevron-right"></i>
                 </div>
-                <div>
-                    <img src="images/Mimi/Travel_Lonesome_resultat.jpg" alt="">
+                <div class="current-img">
+                    <img src="images/photographersImages/Travel_Lonesome.jpg" alt="">
                 </div>
                 <div>
                 <i class="imgBox__close fas fa-times"></i>
@@ -219,10 +220,12 @@
 
 
     </div> -->
-
-    <script src="javascript/likeButton.js"></script>
-    <script src="javascript/lightbox.js"></script>
+    
+    <!-- <script src="javascript/likeButton.js" async></script> -->
+    <!-- <script src="javascript/lightbox.js"></script> -->
     <script src="javascript/modale.js"></script>
     <script src="javascript/boutonTriPhotos.js"></script>
+    <script src="javascript/gallery.js" async></script>
+  
 </body>
 </html>

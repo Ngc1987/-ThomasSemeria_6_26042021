@@ -59,7 +59,7 @@ function showPhotographers(photographData) {
     tagContainer.setAttribute("class", "photographItem__tags");
     
 
-    link.setAttribute("href", "photographe.html");
+    link.setAttribute("href", `photographe.html?id=${photographers[i].id}`);
     img.setAttribute("src", `images/Photographs/${photographers[i].portrait}`);
     img.setAttribute("alt", `Photo de ${photographers[i].name}`);
     name.textContent = photographers[i].name;
