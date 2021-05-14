@@ -3,7 +3,6 @@ const photographerId = params.get("id");
 
 if (params && params.get("id")) {
 
-
     fetchPhotographer(photographerId).then(function(result) {
         if(result === undefined) {
             // Prévoir une erreur (Cas de figure si id ne correspond à personne)
@@ -12,8 +11,6 @@ if (params && params.get("id")) {
 
             fetchMediaByPhotographer(photographerId).then(function(mediaList) {
                 // console.log(mediaList);
-
-
                 const newList = mediaList.map((element) => {
                     return new Media(element);
                 })
@@ -23,20 +20,13 @@ if (params && params.get("id")) {
                 openLightbox();
                 liking();
                 showTotalLikesAndPrice();
+                sortBy();
             });
         }
     })
-
-
-    // showHeaderPhotograph(photographerId) {
-
-    // }
-
-
-} 
-    else {
+} else {
         // Prévoir une erreur (fonction)
-    }
+}
 
 
 function fetchPhotographer(photographerId) {
@@ -49,7 +39,6 @@ function fetchPhotographer(photographerId) {
     
                 photographData = json;
                 const result = photographData.photographers.find(data => data.id == photographerId);
-                
                 
                 showHeaderPhotograph(photographerId);
               
@@ -78,9 +67,10 @@ function showHeaderPhotograph(photographerId) {
             const photographersTags = photographers[i].tags;
 
             for(tag = 0; tag < photographersTags.length; tag++) {
-                const span = document.createElement("span");
-                span.textContent = `#${photographersTags[tag].toLowerCase()}`;
-                tags.appendChild(span);
+                const tagLink = document.createElement("a");
+                tagLink.setAttribute("href", `index.html?tag=${photographersTags[tag]}`)
+                tagLink.textContent = `#${photographersTags[tag].toLowerCase()}`;
+                tags.appendChild(tagLink);
             }
 
             const photo = document.querySelector(".photographPage__head__id--photo");
@@ -91,30 +81,8 @@ function showHeaderPhotograph(photographerId) {
 
             const photographPrice = document.querySelector(".likeAndPrice__price");
             photographPrice.innerHTML = `${photographers[i].price}€ / jour`
-
-
-
-
-            // photographers[i].tags.forEach(function(tag)) {
-            //     const span = document.createElement("span");
-            //     span.textContent = `#${photographTag[tag].toLowerCase()}`;
-            //     span.appendChild(tag);
-            //     tags.appendChild(span);
-            // }
-
-            // for(let t = 0; t < photographTag.length; t++) {
-
-            //     // photographTagLow =photographTag.toLowerCase();
-          
-            //     const span = document.createElement("span");
-            //     span.textContent = `#${photographTag[t].toLowerCase()}`;
-            //     item.classList.add(`${photographTag[t].toLowerCase()}`)
-            //     tagContainer.appendChild(span);
-            //   }
         }
     }
-    
-
 }
 
 
@@ -138,7 +106,6 @@ function fetchMediaByPhotographer(photographerId) {
 
 
 class Media {
-
 
     constructor(data) {
 
@@ -212,10 +179,8 @@ class Media {
             span.appendChild(image);
         }
 
-
         article.appendChild(imgContainer);
         imgContainer.appendChild(span);
-        
         
         article.appendChild(descript);
         descript.appendChild(name);
@@ -223,25 +188,11 @@ class Media {
         descript.appendChild(like);
         descript.appendChild(heart);
 
-
         return article;
     }
-
-
 }
 
-/* <article class="gallery__sample">
 
-        <div classe="image"><img src="images/Mimi/Travel_Lonesome_resultat.jpg" alt=""></div>
-
-        <div class="gallery__sample__descript">
-        <div class="gallery__sample__descript--name">Solitude</div>
-        <div class="gallery__sample__descript--price">70 €</div>
-        <div class="gallery__sample__descript--like unliked">12</div>
-    <i class="fas fa-heart gallery__sample__descript--heart unliked"></i>
-
-    </div>
-</article> */
 
 function openLightbox() { 
     
@@ -285,7 +236,6 @@ function openLightbox() {
                     img.setAttribute("src", selectedItemUrl);
                     currentImg.appendChild(img);
                 }
-            
             }
 
             // Travail sur les boutons précédent et suivant
@@ -355,8 +305,8 @@ function showGallery(list) {
 }
 
 
-
 function liking() {
+    
     const likes = document.querySelectorAll(".gallery__sample__descript--like");
 
     likes.forEach(like => {
@@ -370,17 +320,15 @@ function liking() {
             like.innerText ++ ;
             like.classList.add("liked");
             like.classList.remove("unliked");
-                
-                
     
         } else if (this.classList.contains("unliked")) {
             like.innerText --;
             like.classList.add("unliked");
             like.classList.remove("liked");
         }
+
         showTotalLikesAndPrice();
         }
-        
     });
 }
 
@@ -401,7 +349,52 @@ function showTotalLikesAndPrice() {
     }
 
     totalLikes.innerHTML = sum + ` <i class="fas fa-heart"></i>`;
+}
+
+
+// **************************** BOUTON TRI PHOTOS ***************************
+// **************************************************************************
+const sortWrapper = document.querySelector(".sortWrapper");
+const sortSelect = document.querySelector(".sortWrapper__select");
+
+// sortWrapper.addEventListener("click", function() {
+//   sortSelect.classList.toggle("open");
+// })
+function sortBy() { 
+  document.querySelector('.sortWrapper').addEventListener('click', function() {
+    this.querySelector('.sortWrapper__select').classList.toggle('open');
+  })
+
+
+  for (const value of document.querySelectorAll(".sortWrapper__options--value")) {
+    value.addEventListener('click', function() {
+        if (!this.classList.contains('selected')) {
+            this.parentNode.querySelector('.sortWrapper__options--value.selected').classList.remove('selected');
+            this.classList.add('selected');
+            this.closest('.sortWrapper__select').querySelector('.sortWrapper__select--trigger span').textContent = this.textContent;
+            console.log(value.textContent);
+        }
+
+        const mediaToSort = document.querySelectorAll(".gallery__sample");
+        console.log(mediaToSort);
+        // mediaToSort.forEach(mediaSample => {
+
+        //     if(value.textContent == "Date") {
+        //         mediaToSort
+        //     }
+        // })
+
+        // 
 
 
 
+    })
+  }
+
+  window.addEventListener('click', function(e) {
+    // const select = document.querySelector('.custom-select')
+    if (!sortSelect.contains(e.target)) {
+        sortSelect.classList.remove('open');
+    }
+  });
 }

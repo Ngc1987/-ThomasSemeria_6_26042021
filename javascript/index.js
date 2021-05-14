@@ -29,8 +29,6 @@ const photographList = document.querySelector(".photographList");
 
 function showPhotographers(photographData) {
   // const photographers = photographData["photographers"];
-
-  
   for(let i = 0; i < photographers.length; i++) {
     
     // console.log(photographData["medias"]);
@@ -101,43 +99,77 @@ function showPhotographers(photographData) {
   // *************************************************************
   // ************************ TRI TAGS ***************************
 
-  // Sélection des span contenant les tags
-  let tagSort = document.querySelectorAll("span");
-  
+  // Sélection de tous les photographes sur page index.html
+  const photographeList = document.querySelectorAll(".photographItem");
 
-// Pour chaque tag, lui appliquer au clic la fonction:
+  // Afficher les photographes selon le tag sélectionné en paramètre
+  function showPhotographListByTag(tagChoosen) {
+    Array.from(photographeList).forEach(function(photographe) {
+
+      const photographTag = photographe.lastElementChild.childNodes;
+      // console.log(photographTag[0]);
+
+        for(let tags = 0; tags < photographTag.length; tags++) {
+        
+          const photographTagFormat = photographTag[tags].innerText.toLowerCase().substring(1);
+
+          if(photographTagFormat.indexOf(tagChoosen) !== -1 || tagChoosen == null) {
+            photographe.style.display = "block";
+            console.log(photographTagFormat);
+            break;
+
+          } else {
+            photographe.style.display = "none";
+          }
+        }
+    })
+  }
+
+
+  // Sélection des span contenant les tags sur index.html
+  let tagSort = document.querySelectorAll("span");
+
+  // Pour chaque tag, au clic:
   tagSort.forEach(function(tag) {
       tag.addEventListener("click", function(e) {
         // On prend le texte contenu dans le tag cliqué, on le transforme en minuscules et supprime le #
         const tagFilter = e.target.innerText.toLowerCase().substring(1);
-        // On sélectionne les photographes affichés dans la page
-        const photographeList = document.querySelectorAll(".photographItem");
-        console.log(tagFilter);
+        // console.log(tagFilter);
 
-
-        Array.from(photographeList).forEach(function(photographe) {
-
-          const photographTag = photographe.lastElementChild.childNodes;
-          // console.log(photographTag[0]);
-
-            for(let tags = 0; tags < photographTag.length; tags++) {
-            
-              const photographTagFormat = photographTag[tags].innerText.toLowerCase().substring(1);
-
-              if(photographTagFormat.indexOf(tagFilter) !== -1) {
-                photographe.style.display = "block";
-                console.log(photographTagFormat);
-                break;
-
-              } else {
-                photographe.style.display = "none";
-              }
-            }
-        })
-
+        // Appel de la fonction avec le tag sélectionné en paramètre
+        showPhotographListByTag(tagFilter);
       });
   });
 
+  
+  const params = new URLSearchParams(window.location.search);
+  const photographerTag = params.get("tag");
+  // const photographeList = document.querySelectorAll(".photographItem");
+
+  // Appel de la fonction avec le tag sélectionné sur la page du photographe
+  showPhotographListByTag(photographerTag);
+
+  console.log(photographerTag);
+
+  // Array.from(photographeList).forEach(function(photographe) {
+
+  //   const photographTag = photographe.lastElementChild.childNodes;
+  // // console.log(photographTag[0]);
+
+  //     for(let tags = 0; tags < photographTag.length; tags++) {
+    
+  //       const photographTagFormat = photographTag[tags].innerText.toLowerCase().substring(1);
+
+  //       if(photographTagFormat.indexOf(photographerTag) !== -1 || photographerTag == null) {
+  //         photographe.style.display = "block";
+  //         console.log(photographTagFormat);
+  //         break;
+
+  //       } else {
+  //         photographe.style.display = "none";
+  //       }
+  //     }
+  // } )
 
 
   
@@ -151,16 +183,19 @@ function showPhotographers(photographData) {
 
 
 
+// if (params && params.get("tag"))
+
+
+// var str = "http://waytolearnx.com/t.html?name=alex-babtise&age=25&address=paris";
+// var url = new URL(str);
+// var name = url.searchParams.get("name");
+// console.log(name);
 
 
 
-
-
-
-
-
-
-
+// let url = new URL(params);
+// let tagSearch = url.searchParams.get("tag");
+// console.log(tagSearch);
 
 
 
