@@ -254,7 +254,7 @@ header #topLink:visited {
   align-items: flex-end;
   margin-top: 15px;
 }
-.photographPage__head__descript--tags span {
+.photographPage__head__descript--tags a {
   color: #911c1c;
   font-size: 18px;
   font-weight: bold;
@@ -263,9 +263,10 @@ header #topLink:visited {
   margin: 5px 5px;
   padding: 2px 10px;
   cursor: pointer;
+  text-decoration: none;
   transition: all 0.3s ease;
 }
-.photographPage__head__descript--tags span:hover {
+.photographPage__head__descript--tags a:hover {
   color: #fff;
   background: #911c1c;
 }

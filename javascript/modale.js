@@ -36,7 +36,7 @@ const keyCodes = {
 // pouvoir afficher la modale et désactiver le document principal
 const open = function (dialog) {
   const focusableElements = dialog.querySelectorAll(focusableElementsArray);
-  const firstFocusableElement = focusableElements[1];
+  const firstFocusableElement = focusableElements[0];
   const lastFocusableElement = focusableElements[focusableElements.length - 1];
 
   dialog.setAttribute('aria-hidden', false);

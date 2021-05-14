@@ -291,7 +291,7 @@ header {
                 align-items: flex-end;
                 margin-top: 15px;
 
-                span {
+                a {
                     color: $primary;
                     font-size: 18px;
                     font-weight: bold;
@@ -300,6 +300,7 @@ header {
                     margin: 5px 5px;
                     padding: 2px 10px;
                     cursor: pointer;
+                    text-decoration: none;
                     transition: all 0.3s ease;
         
                     &:hover {
@@ -319,9 +320,9 @@ header {
             position: absolute;
             right: 50px;
 
-            &--photo {
-                // margin-right: 30px;
-            }
+            // &--photo {
+            //     // margin-right: 30px;
+            // }
     
             &--photo img{
                 width: 200px;
