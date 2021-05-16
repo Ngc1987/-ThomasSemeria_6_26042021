@@ -67,6 +67,7 @@ header #topLink {
   height: 30px;
   transform: translateX(-50%);
   background: #db8876;
+  color: black;
   text-decoration: none;
   border-radius: 5px;
   display: flex;
