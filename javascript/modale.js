@@ -4,13 +4,15 @@ const submitBtn = document.querySelector("#submit");
 const prenom = document.querySelector("#prenom");
 const nom = document.querySelector("#nom");
 const email = document.querySelector("#email");
-
+// let form = document.querySelector("#inscription");
 submitBtn.onclick = function(e) {
-    e.preventDefault();
-    console.log(prenom.value);
-    console.log(nom.value);
-    console.log(email.value);
+  e.preventDefault();
+  console.log(prenom.value);
+  console.log(nom.value);
+  console.log(email.value);
 }
+
+
 
 
 // ******************* OUVERTURE FENETRE MODALE **************************
@@ -34,7 +36,7 @@ const keyCodes = {
 };
 // Fonction open qui passe l'attribut aria-hidden à false pour 
 // pouvoir afficher la modale et désactiver le document principal
-const open = function (dialog) {
+  const open = function (dialog) {
   const focusableElements = dialog.querySelectorAll(focusableElementsArray);
   const firstFocusableElement = focusableElements[0];
   const lastFocusableElement = focusableElements[focusableElements.length - 1];
@@ -129,4 +131,90 @@ triggers.forEach((trigger) => {
       close(dialog, trigger);
     }
   }); 
+
 });
+
+
+
+
+
+//**********************************************************************//
+//*************************   CHAMP PRENOM   ***************************//
+//**********************************************************************//
+prenom.addEventListener('change', function() {
+  validPrenom(this);
+})
+
+const validPrenom = function (inputPrenom) {
+
+  let prenomErreur = document.getElementById("prenomErreur");
+  let prenomRegExp = new RegExp ('^[a-zA-Z]{2}[a-zA-Z-\'éèêàâôöïäüÊÈ]*$','g');
+  let testPrenom = prenomRegExp.test(inputPrenom.value);
+  // console.log(testPrenom); 
+
+  if (testPrenom) {
+      prenomErreur.innerHTML ='';
+      return true;
+  } else {
+      prenomErreur.innerHTML = 'Veuillez saisir uniquement des lettres et 2 caractères minimum';
+      return false;
+  };
+}
+
+//**********************************************************************//
+//***************************   CHAMP NOM   ****************************//
+//**********************************************************************//
+//*****************   Ecouter la modification du nom   *****************//
+nom.addEventListener('change', function() {
+  validNom(this);
+})
+
+const validNom = function (inputNom) {
+
+  let nomErreur = document.getElementById("nomErreur");
+  let nomRegExp = new RegExp ('^[a-zA-Z]{2}[a-zA-Z-\'éèêàâôöïäüÊÈ]*$','g');
+  let testNom = nomRegExp.test(inputNom.value);
+  // console.log(testNom); 
+
+  if (testNom) {
+      nomErreur.innerHTML ='';
+      return true;
+  } else {
+      nomErreur.innerHTML = 'Veuillez saisir uniquement des lettres et 2 caractères minimum';
+      return false;
+  };
+}
+//**********************************************************************//
+//*************************   CHAMP EMAIL   ****************************//
+//**********************************************************************//
+//**************   Ecouter la modification de l'email   ****************//
+email.addEventListener('change', function() {
+  validEmail(this);
+  console.log(email);
+})
+
+//*** Fonction verification email pendant la saisie de l'utilisateur ***//
+const validEmail = function (inputEmail) {
+
+  // emailErreur correspond à un span dans le html qui servira à afficher notre message d'erreur
+  let emailErreur = document.getElementById("emailErreur");
+  // La RegExp correspondant à ce champ
+  let emailRegExp = new RegExp ('^[a-zA-Z0-9.-_]+[@]{1}[a-zA-Z0-9.-_]+[.]{1}[a-z]{2,10}$','g');
+  // On teste si la valeur saisie dans l'input respecte la RegExp correspondante
+  let testEmail = emailRegExp.test(inputEmail.value);
+  // console.log(inputEmail.value); 
+
+  console.log(validEmail);
+
+  // Si la valeur saisie dans l'input respecte les règles de la RegExp, testEmail vaut "true"
+  // Donc si testEmail est true, on renvoie true, sinon on renvoie false et fait apparaître
+  // un message d'erreur
+  if (testEmail) {
+    emailErreur.innerHTML = '';
+      return true;
+  } else {
+      emailErreur.innerHTML = 'Email invalide';
+      return false;
+      submitBtn.disabled = true;
+  };
+  }

@@ -1,5 +1,8 @@
 const params = new URLSearchParams(window.location.search);
 const photographerId = params.get("id");
+const galleryContainer = document.querySelector(".gallery");
+
+
 
 if (params && params.get("id")) {
 
@@ -14,13 +17,14 @@ if (params && params.get("id")) {
                 const newList = mediaList.map((element) => {
                     return new Media(element);
                 })
+                console.log(newList);
 
                 // console.log(newList);
+                sortBy(newList);
                 showGallery(newList);
                 openLightbox();
                 liking();
                 showTotalLikesAndPrice();
-                sortBy();
             });
         }
     })
@@ -39,7 +43,7 @@ function fetchPhotographer(photographerId) {
     
                 photographData = json;
                 const result = photographData.photographers.find(data => data.id == photographerId);
-                
+                console.log(result);
                 showHeaderPhotograph(photographerId);
               
                 resolve(result);
@@ -96,8 +100,11 @@ function fetchMediaByPhotographer(photographerId) {
     
               photographData = json;
               const result = photographData.media.filter(data => data.photographerId == photographerId);
-              
+
+              console.log(result);
               resolve(result);
+            //   sortBy(result);
+
             });
         });
     })
@@ -136,12 +143,12 @@ class Media {
         const article = document.createElement("article");
         article.setAttribute("class", "gallery__sample");
 
-        const imgContainer = document.createElement("div");
+        const imgContainer = document.createElement("section");
         imgContainer.setAttribute("class", "image");
 
         const span = document.createElement("span");
 
-        const descript = document.createElement("div");
+        const descript = document.createElement("section");
         descript.setAttribute("class", "gallery__sample__descript");
         
 
@@ -166,6 +173,8 @@ class Media {
             const video = document.createElement("video");
             video.setAttribute("src", "images/photographersImages/"+ this.source);
             video.setAttribute("poster", `images/photographersImages/mini${this.source.replace("mp4", "jpg")}`);
+            video.setAttribute("aria-label", this.title);
+            video.setAttribute("alt", this.title);
             span.appendChild(video);  
             video.onclick = function() {
                 video.setAttribute("controls", "");
@@ -176,6 +185,8 @@ class Media {
         if(this.source.includes("jpg")) {
             const image = document.createElement("img");
             image.setAttribute("src", "images/photographersImages/"+ this.source);  
+            image.setAttribute("alt", this.title);  
+            image.setAttribute("aria-label", this.title);  
             span.appendChild(image);
         }
 
@@ -184,7 +195,6 @@ class Media {
         
         article.appendChild(descript);
         descript.appendChild(name);
-        // descript.appendChild(price);
         descript.appendChild(like);
         descript.appendChild(heart);
 
@@ -202,17 +212,26 @@ function openLightbox() {
     previewImg = previewBox.querySelector("img"),
     closeIcon = previewBox.querySelector(".imgBox__close"),
     currentImg = previewBox.querySelector(".current-img"),
-    totalImg = previewBox.querySelector(".total-img");
     shadow = document.querySelector(".shadow");// Une fois la fenêtre chargée
-    console.log(currentImg.children[0]);
     
     for(let i = 0; i < gallery.length; i++) {
+
+
+        const prevBtn = document.querySelector(".prev");
+        const nextBtn = document.querySelector(".next");
+
+        
 
         let newIndex = i; // On passe i comme valeur à la variable newIndex
         let clickImgIndex;
 
         gallery[i].onclick = () => {
 
+            
+            previewBox.setAttribute('aria-hidden', false);
+            doc.setAttribute('aria-hidden', true);
+
+            prevBtn.focus();  
             clickImgIndex = newIndex; // On passe l'index de l'image cliquée à la variable clickImgIndex
             // currentImg.children[0].remove();
 
@@ -225,9 +244,12 @@ function openLightbox() {
                 if(selectedItemUrl.includes("mp4")) {
                     currentImg.children[0].remove();
                     const video = document.createElement("video");
+                    const error = document.createElement("p");
+                    error.innerHTML = "Votre navigateur ne prend pas en charge ce format de vidéo. Pensez à le mettre à jour";
                     video.setAttribute("src", selectedItemUrl);
                     video.setAttribute("autoplay", "");
                     video.setAttribute("controls", "");
+                    video.appendChild(error);
                     currentImg.appendChild(video);
                 }
                 if(selectedItemUrl.includes("jpg")) {
@@ -238,50 +260,38 @@ function openLightbox() {
                 }
             }
 
-            // Travail sur les boutons précédent et suivant
-            const prevBtn = document.querySelector(".prev");
-            const nextBtn = document.querySelector(".next");
-
-            if(newIndex == 0) {
-                prevBtn.style.display = "none";
-            }
-            if(newIndex >= gallery.length - 1) {
-                nextBtn.style.display = "none";
-            }
-
-            prevBtn.onclick = () => {
-
-                newIndex--; // Enlève 1 à l'index de l'image à afficher
-
-                if(newIndex == 0) {
-                    preview();
-                    prevBtn.style.display = "none";
-                } else {
-                    preview(); // Appelle la fonction preview pour changer la source de l'image
-                    nextBtn.style.display = "block";
-                }
-            }
-
-            nextBtn.onclick = () => {
-
-                newIndex++; // Enlève 1 à l'index de l'image à afficher
-
-                if(newIndex >= (gallery.length - 1)) {
-                    preview();
-                    nextBtn.style.display = "none";
-                } else {
-                    preview(); // Appelle la fonction preview pour changer la source de l'image
-                    prevBtn.style.display = "block";
-                }
-            }
-
             preview(); // Appelle fonction preview
+
+            function previous() {
+                newIndex--; // Enlève 1 à l'index de l'image à afficher
+                if(newIndex < 0) {
+                    newIndex = gallery.length - 1;
+                }
+                preview();
+            }
+
+            prevBtn.addEventListener("click", previous);
+
+            
+            function next() {
+                newIndex++; // Enlève 1 à l'index de l'image à afficher
+                if(newIndex > (gallery.length - 1)) {
+                    newIndex = 0;
+                } 
+                preview();
+            }
+
+            nextBtn.addEventListener("click", next); 
 
             previewBox.classList.add("show");
             shadow.style.display = "block"
             document.querySelector("body").style.overflow = "hidden";
 
-            closeIcon.onclick = () => {
+            
+            function closeLightBox() {
+
+                previewBox.setAttribute('aria-hidden', true);
+                doc.setAttribute('aria-hidden', false);
 
                 previewBox.classList.remove("show");
                 prevBtn.style.display = "block";
@@ -290,18 +300,41 @@ function openLightbox() {
                 shadow.style.display = "none"
                 document.querySelector("body").style.overflow = "auto";
             }
-        }
+
+            closeIcon.addEventListener("click", closeLightBox);
+            
+
+            document.addEventListener("keydown", (e) => {
+
+                console.log(e.code);
+                if(e.code == "ArrowLeft") {
+                    previous();
+                }
+            
+                if(e.code == "ArrowRight") {
+                    next();
+                }
+                if(e.code == "Escape") {
+                    closeLightBox();
+                }
+            })
+        };    
     }
 }
 
 
 
+
+
+
 function showGallery(list) {
-    const galleryContainer = document.querySelector(".gallery");
+    // const galleryContainer = document.querySelector(".gallery");
 
     list.forEach((media) => {
         galleryContainer.appendChild(media.getHtml())
     })
+
+    // sortBy(list);
 }
 
 
@@ -364,34 +397,68 @@ const sortSelect = document.querySelector(".sortWrapper__select");
 // sortWrapper.addEventListener("click", function() {
 //   sortSelect.classList.toggle("open");
 // })
-function sortBy() { 
+function sortBy(newList) { 
   document.querySelector('.sortWrapper').addEventListener('click', function() {
     this.querySelector('.sortWrapper__select').classList.toggle('open');
   })
 
 
   for (const value of document.querySelectorAll(".sortWrapper__options--value")) {
+
     value.addEventListener('click', function() {
+
         if (!this.classList.contains('selected')) {
             this.parentNode.querySelector('.sortWrapper__options--value.selected').classList.remove('selected');
             this.classList.add('selected');
             this.closest('.sortWrapper__select').querySelector('.sortWrapper__select--trigger span').textContent = this.textContent;
-            console.log(value.textContent);
+            console.log(this.textContent);
         }
 
-        const mediaToSort = document.querySelectorAll(".gallery__sample");
-        console.log(mediaToSort);
-        // mediaToSort.forEach(mediaSample => {
+        if(this.textContent == "Date") {
+            while( galleryContainer.firstChild) {
+                 galleryContainer.removeChild( galleryContainer.firstChild);
+            }
+            const sortPics = newList.sort(function (a, b) {
+                return new Date(a.date) - new Date(b.date);
+            })
+            // galleryContainer.removeChild(childNodes);
 
-        //     if(value.textContent == "Date") {
-        //         mediaToSort
-        //     }
-        // })
+            console.log(sortPics);
+            showGallery(sortPics);
 
-        // 
+        }
+        if(this.textContent == "Titre") {
+            while( galleryContainer.firstChild) {
+                galleryContainer.removeChild( galleryContainer.firstChild);
+           }
+            const sortPics = newList.sort(function (a, b) {
+                return a.title.localeCompare(b.title);
 
+            })
+            // galleryContainer.removeChild(childNodes);
 
+            console.log(sortPics);
+            showGallery(sortPics);
 
+        }
+        if(this.textContent == "Popularité") {
+            while( galleryContainer.firstChild) {
+                galleryContainer.removeChild( galleryContainer.firstChild);
+           }
+            const sortPics = newList.sort(function (a, b) {
+                return b.likes - a.likes;
+
+            })
+            // galleryContainer.removeChild(childNodes);
+
+            console.log(sortPics);
+            showGallery(sortPics);
+
+        }
+
+        
+        openLightbox();
+        liking();
     })
   }
 
