@@ -12,7 +12,7 @@
 <body>
 
     <header>
-        <a href="index.html"><div id="logo" alt="Lien vers page d'accueil" aria-label="Logo Fisheye et lien vers page d'accueil"></div></a>
+        <a href="index.html" aria-label="Logo Fisheye et lien vers page d'accueil"><div id="logo" alt="Lien vers page d'accueil"></div></a>
     </header>
 
 
@@ -24,12 +24,14 @@
             <article class="photographPage__head">
 
                 <section class="photographPage__head__descript">
-                    <div class="photographPage__head__descript--name">Mimi Keel</div>
-                    <div class="photographPage__head__descript--city">London, UK</div>
-                    <div class="photographPage__head__descript--phrase">Voir le beau dans le quotidien</div>
+                    <h1 class="photographPage__head__descript--name"></h1>
+                    <div tabindex="0">
+                        <div class="photographPage__head__descript--city"></div>
+                        <div class="photographPage__head__descript--phrase"></div>
+                    </div>
                     <div class="photographPage__head__descript--tags"></div>
                 </section>
-                <button class="contact" type="button" aria-haspopup="dialog" aria-controls="dialog">Contactez-moi</button>
+                <button class="contact" type="button" aria-haspopup="dialog" aria-controls="dialog" aria-label="Contactez moi">Contactez-moi</button>
 
                 <section class="photographPage__head__id">
                     <div class="photographPage__head__id--photo">
@@ -40,20 +42,31 @@
 
             </article>
 
+            <aside class="likeAndPrice">
+                <section class="likeAndPrice__like"></section>
+                <section class="likeAndPrice__price"></section>
+            </aside>
+
         <!-- </article> -->
 
+
+
         <article class="sortWrapper">
-            <p>Trier par</p>
-            <div class="sortWrapper__select">
+            <section tabindex="0" id="sortby">Trier par</section>
+
+            <section class="sortWrapper__select" role="button" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="sortby" tabindex="0">
+
                 <div class="sortWrapper__select--trigger"><span>Popularité</span>
                     <div class="arrow"></div>
                 </div>
+
                 <div class="sortWrapper__options">
-                    <span class="sortWrapper__options--value selected" data-value="popularite">Popularité</span>
-                    <span class="sortWrapper__options--value" data-value="date">Date</span>
-                    <span class="sortWrapper__options--value" data-value="titre">Titre</span>
+                    <span class="sortWrapper__options--value selected" data-value="popularite" tabindex="-1">Popularité</span>
+                    <span class="sortWrapper__options--value" data-value="date" tabindex="-1">Date</span>
+                    <span class="sortWrapper__options--value" data-value="titre" tabindex="-1">Titre</span>
                 </div>
-            </div>
+
+            </section>
         </article>
 
         <article class="gallery">
@@ -73,28 +86,25 @@
 
         </article>
 
-        <aside class="likeAndPrice">
-            <div class="likeAndPrice__like"></div>
-            <div class="likeAndPrice__price"></div>
-        </aside>
+        
 
 
         <article class="preview-box" aria-hidden="true" role="dialog" tabindex="-1">
             
-            <div class="imgBox">
-                <div class="imgBox__slide prev" tabindex="0">
+            <section class="imgBox">
+                <section class="imgBox__slide prev" tabindex="0">
                     <i class="fas fa-chevron-left"></i>
-                </div>
-                <div class="imgBox__slide next" tabindex="0">
+                </section>
+                <section class="imgBox__slide next" tabindex="0">
                     <i class="fas fa-chevron-right"></i>
-                </div>
-                <div class="current-img">
+                </section>
+                <section class="current-img">
                     <img src="images/photographersImages/Travel_Lonesome.jpg" alt="">
-                </div>
-                <div tabindex="0">
+                </section>
+                <section tabindex="0">
                 <i class="imgBox__close fas fa-times"></i>
-            </div>
-            </div>
+            </section>
+            </section>
         </article>
 
         <div class="shadow">
@@ -103,10 +113,10 @@
 
     </main>
 
-    <article id="dialog" role="dialog" aria-labelledby="dialog-title" aria-describedby="dialog-desc" aria-modal="true" aria-hidden="true" tabindex="-1" class="dialog">
+    <article id="dialog" role="dialog" aria-label="Formulaire de contact" aria-modal="true" aria-hidden="true" tabindex="-1" class="dialog">
         <div role="document" class="dialog__box">
-            <p class="dialog__box--name">Contactez-moi</p>
-            <p class="dialog__box--contact">Mimi Keel</p>
+            <h2 class="dialog__box--name">Contactez-moi</h2>
+            <h2 class="dialog__box--contact"></h2>
             <button type="button" aria-label="Fermer" title="Fermer cette fenêtre modale" data-dismiss="dialog" class="dialog__box--close">X</button>
 
             <form action="" method="POST" class="dialog__box--modal" id="formulaire">

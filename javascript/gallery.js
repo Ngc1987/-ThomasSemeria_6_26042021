@@ -51,7 +51,9 @@ function fetchPhotographer(photographerId) {
         });
     })
 }
-
+/**
+ * @param  {} photographerId
+ */
 function showHeaderPhotograph(photographerId) {
     console.log(photographData.photographers);
     console.log(photographerId);
@@ -59,20 +61,27 @@ function showHeaderPhotograph(photographerId) {
     const photographers = photographData.photographers;
 
     for(i= 0; i < photographers.length; i++) {
+
         if(photographers[i].id == photographerId) {
+
             const name = document.querySelector(".photographPage__head__descript--name");
             const city = document.querySelector(".photographPage__head__descript--city");
             const phrase = document.querySelector(".photographPage__head__descript--phrase");
             const tags = document.querySelector(".photographPage__head__descript--tags");
+            const nameOnDialogBox = document.querySelector(".dialog__box--contact");
             name.innerHTML = photographers[i].name;
+            name.setAttribute("tabindex", "0");
             city.innerHTML = `${photographers[i].city}, ${photographers[i].country}`;
             phrase.innerHTML = photographers[i].tagline;
+            nameOnDialogBox.innerHTML = photographers[i].name;
 
             const photographersTags = photographers[i].tags;
 
             for(tag = 0; tag < photographersTags.length; tag++) {
+
                 const tagLink = document.createElement("a");
-                tagLink.setAttribute("href", `index.html?tag=${photographersTags[tag]}`)
+                tagLink.setAttribute("href", `index.html?tag=${photographersTags[tag]}`);
+                tagLink.setAttribute("aria-label", `Retour à la liste des photographes filtrés avec le tag ${photographersTags[tag]}`);
                 tagLink.textContent = `#${photographersTags[tag].toLowerCase()}`;
                 tags.appendChild(tagLink);
             }
@@ -80,11 +89,15 @@ function showHeaderPhotograph(photographerId) {
             const photo = document.querySelector(".photographPage__head__id--photo");
             const photographerPortrait = document.createElement("img");
             photographerPortrait.setAttribute("src", `images/Photographs/${photographers[i].portrait}`);
+            photographerPortrait.setAttribute("aria-label", photographers[i].name);
+            photographerPortrait.setAttribute("tabindex", "0");
             photo.appendChild(photographerPortrait);
 
 
             const photographPrice = document.querySelector(".likeAndPrice__price");
-            photographPrice.innerHTML = `${photographers[i].price}€ / jour`
+            photographPrice.innerHTML = `${photographers[i].price}€ / jour`;
+            photographPrice.setAttribute("tabindex", "0")
+            photographPrice.setAttribute("aria-label", `Ses services vous seront facturés ${photographers[i].price} euros par jour`);
         }
     }
 }
@@ -152,18 +165,23 @@ class Media {
         descript.setAttribute("class", "gallery__sample__descript");
         
 
-        const name = document.createElement("div");
+        const name = document.createElement("section");
         name.setAttribute("class", "gallery__sample__descript--name");
         name.innerHTML = this.title;
+        name.setAttribute("aria-label", this.title);
+        name.setAttribute("tabindex", "0");
 
         // const price = document.createElement("div");
         // price.setAttribute("class", "gallery__sample__descript--price");
         // price.innerHTML = this.price;
         
 
-        const like = document.createElement("div");
+        const like = document.createElement("section");
         like.setAttribute("class", "gallery__sample__descript--like unliked");
         like.innerHTML = this.likes;
+        like.setAttribute("tabindex", "0");
+        like.setAttribute("aria-label", `likes`);
+
 
         const heart = document.createElement("i");
         heart.setAttribute("class", "fas fa-heart gallery__sample__descript--heart unliked");
@@ -175,7 +193,22 @@ class Media {
             video.setAttribute("poster", `images/photographersImages/mini${this.source.replace("mp4", "jpg")}`);
             video.setAttribute("aria-label", this.title);
             video.setAttribute("alt", this.title);
-            span.appendChild(video);  
+            video.setAttribute("tabindex", "0");
+            video.setAttribute("controls", "");
+
+            const errorMessage = document.createElement("p");
+            errorMessage.textContent = "Votre navigateur ne peut pas lire le format de vidéo proposé. Pensez à le mettre à jour";
+            video.appendChild(errorMessage);
+            imgContainer.appendChild(video);  
+
+            const subtitles = document.createElement("track");
+            subtitles.setAttribute("src", `images/photographersImages/${this.source.replace("mp4", "vtt")}`);
+            subtitles.setAttribute("label", "French");
+            subtitles.setAttribute("kind", "subtitles");
+            subtitles.setAttribute("srclang", "fr");
+            video.appendChild(subtitles);
+            console.log(video);
+
             video.onclick = function() {
                 video.setAttribute("controls", "");
                 video.setAttribute("autoplay", "");
@@ -186,7 +219,8 @@ class Media {
             const image = document.createElement("img");
             image.setAttribute("src", "images/photographersImages/"+ this.source);  
             image.setAttribute("alt", this.title);  
-            image.setAttribute("aria-label", this.title);  
+            image.setAttribute("aria-label", this.title);
+            image.setAttribute("tabindex", "0");  
             span.appendChild(image);
         }
 
@@ -231,7 +265,7 @@ function openLightbox() {
             previewBox.setAttribute('aria-hidden', false);
             doc.setAttribute('aria-hidden', true);
 
-            prevBtn.focus();  
+            // prevBtn.focus();  
             clickImgIndex = newIndex; // On passe l'index de l'image cliquée à la variable clickImgIndex
             // currentImg.children[0].remove();
 
@@ -344,27 +378,37 @@ function liking() {
 
     likes.forEach(like => {
 
-    like.onclick = function classToggle() {
+        like.addEventListener("click", classToggle);
 
-        this.classList.toggle('liked');
-        this.classList.toggle('unliked');
+        like.addEventListener("keydown", (e) => {
 
-        if(this.classList.contains("liked")) {
-            like.innerText ++ ;
-            like.classList.add("liked");
-            like.nextElementSibling.classList.add("likedHeart");
-            like.classList.remove("unliked");
-    
-        } else if (this.classList.contains("unliked")) {
-            like.innerText --;
-            like.classList.add("unliked");
-            like.nextElementSibling.classList.remove("likedHeart");
-            like.classList.remove("liked");
-        }
+            console.log(e.code);
+            if(e.code == "Enter" || e.code == "NumpadEnter") {
+                classToggle();
+            }
+        })
+        
+        function classToggle() {
 
-        console.log(like.nextElementSibling);
+            like.classList.toggle('liked');
+            like.classList.toggle('unliked');
 
-        showTotalLikesAndPrice();
+            if(like.classList.contains("liked")) {
+                like.innerText ++ ;
+                like.classList.add("liked");
+                like.nextElementSibling.classList.add("likedHeart");
+                like.classList.remove("unliked");
+        
+            } else if (like.classList.contains("unliked")) {
+                like.innerText --;
+                like.classList.add("unliked");
+                like.nextElementSibling.classList.remove("likedHeart");
+                like.classList.remove("liked");
+            }
+
+            console.log(like.nextElementSibling);
+
+            showTotalLikesAndPrice();
         }
     });
 }
@@ -374,6 +418,7 @@ function showTotalLikesAndPrice() {
 
     const totalLikes = document.querySelector(".likeAndPrice__like");
     const likes = document.querySelectorAll(".gallery__sample__descript--like");
+    
 
     let sum = 0;
 
@@ -386,6 +431,8 @@ function showTotalLikesAndPrice() {
     }
 
     totalLikes.innerHTML = sum + ` <i class="fas fa-heart"></i>`;
+    totalLikes.setAttribute("tabindex", "0");
+    totalLikes.setAttribute("aria-label", `En cumulé, les oeuvres de ce photographe on été aimées ${sum} fois.`);
 }
 
 
@@ -394,27 +441,60 @@ function showTotalLikesAndPrice() {
 const sortWrapper = document.querySelector(".sortWrapper");
 const sortSelect = document.querySelector(".sortWrapper__select");
 
+const sortButton = document.querySelector(".sortWrapper__select--trigger");
+const beforeAfter = document.querySelector(".arrow");
+
+sortButton.addEventListener("mouseenter", () => {
+    sortSelect.classList.toggle("black");
+})
+sortButton.addEventListener("mouseleave", () => {
+    sortSelect.classList.toggle("black");
+})
+
 // sortWrapper.addEventListener("click", function() {
 //   sortSelect.classList.toggle("open");
 // })
 function sortBy(newList) { 
-  document.querySelector('.sortWrapper').addEventListener('click', function() {
-    this.querySelector('.sortWrapper__select').classList.toggle('open');
-  })
+
+
+    sortWrapper.addEventListener('click', openSortWrapper);
+    sortWrapper.addEventListener("keydown", (e) => {
+        if(e.code == "NumpadEnter" || e.code == "Enter") {
+            openSortWrapper();
+        }
+    })
+
+
+  function openSortWrapper() {
+    sortSelect.classList.toggle('open');
+  }
 
 
   for (const value of document.querySelectorAll(".sortWrapper__options--value")) {
 
-    value.addEventListener('click', function() {
+    value.setAttribute("tabindex", "0");
 
-        if (!this.classList.contains('selected')) {
-            this.parentNode.querySelector('.sortWrapper__options--value.selected').classList.remove('selected');
-            this.classList.add('selected');
-            this.closest('.sortWrapper__select').querySelector('.sortWrapper__select--trigger span').textContent = this.textContent;
-            console.log(this.textContent);
+    value.addEventListener('click', () => {
+        sortMedias(value)}
+    );
+
+    value.addEventListener("keydown", (e) => {
+        console.log(e.code);
+        if(e.code == "NumpadEnter") {
+            sortMedias(value);
+        }
+    });
+    
+    function sortMedias(value) {
+
+        if (!value.classList.contains('selected')) {
+            value.parentNode.querySelector('.sortWrapper__options--value.selected').classList.remove('selected');
+            value.classList.add('selected');
+            value.closest('.sortWrapper__select').querySelector('.sortWrapper__select--trigger span').textContent = value.textContent;
+            console.log(value.textContent);
         }
 
-        if(this.textContent == "Date") {
+        if(value.textContent == "Date") {
             while( galleryContainer.firstChild) {
                  galleryContainer.removeChild( galleryContainer.firstChild);
             }
@@ -427,7 +507,7 @@ function sortBy(newList) {
             showGallery(sortPics);
 
         }
-        if(this.textContent == "Titre") {
+        if(value.textContent == "Titre") {
             while( galleryContainer.firstChild) {
                 galleryContainer.removeChild( galleryContainer.firstChild);
            }
@@ -441,7 +521,7 @@ function sortBy(newList) {
             showGallery(sortPics);
 
         }
-        if(this.textContent == "Popularité") {
+        if(value.textContent == "Popularité") {
             while( galleryContainer.firstChild) {
                 galleryContainer.removeChild( galleryContainer.firstChild);
            }
@@ -459,7 +539,8 @@ function sortBy(newList) {
         
         openLightbox();
         liking();
-    })
+    }
+    
   }
 
   window.addEventListener('click', function(e) {

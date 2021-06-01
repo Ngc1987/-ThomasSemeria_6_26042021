@@ -145,6 +145,7 @@ header {
             display: flex;
             flex-direction: column;
             align-items: center;
+            transition: all 0.4s ease;
 
             &:focus {
                 background: rgba(145,28,28,0.15);
@@ -192,6 +193,7 @@ header {
         flex-direction: column;
         align-items: center;
         justify-content: center;
+        transition: all 0.4s ease;
 
         &__city {
             color: $primary;
@@ -306,6 +308,8 @@ header {
 
             &--name {
                 font-size: 64px;
+                font-weight: 300;
+                margin: 0;
                 color: $secondary;
             }
 
@@ -381,11 +385,19 @@ header {
     }
 }
 
+
+
 .sortWrapper {
     position: relative;
     user-select: none;
     width: 170px;
     margin-top: 30px;
+
+    #sortby {
+        font-size: 18px;
+        font-weight: 700;
+        margin-top: 15px;
+    }
 
     &__select {
         position: absolute;
@@ -413,6 +425,10 @@ header {
             transition: all 0.4s ease;
 
             &:hover {
+                background: $secondary;
+                color: #000;
+            }
+            &:focus {
                 background: $secondary;
                 color: #000;
             }
@@ -499,36 +515,32 @@ header {
     &::before {
         left: -5px;
         transform: rotate(45deg);
-        background: #fff;
-
-        &:hover {
-            background: #000;
-        }
+        background-color: #fff;
     }
 
     &::after {
         left: 5px;
         transform: rotate(-45deg);
-        background: #fff;
-
-        &:hover {
-            background: #000;
-        }
+        background-color: #fff;
     }
 }
 
 .open .arrow::before {
     left: -5px;
     transform: rotate(-45deg);
-    background: #000;
 }
 
 .open .arrow::after {
     left: 5px;
     transform: rotate(45deg);
-    background: #000;
 }
 
+.black .arrow::before{
+    background-color: #000;
+}
+.black .arrow::after{
+    background-color: #000;
+}
 // .sortMenu {
 //     display: flex;
 //     flex-direction: row;
@@ -1125,7 +1137,7 @@ header {
 }
 @media (max-width: 550px) {
     header h1 {
-        font-size: 14px;
+        font-size: 20px;
     }
     .photographPage__head__id {
         // right: 20px;
