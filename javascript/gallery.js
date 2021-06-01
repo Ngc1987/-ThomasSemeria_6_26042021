@@ -194,18 +194,18 @@ class Media {
             video.setAttribute("aria-label", this.title);
             video.setAttribute("alt", this.title);
             video.setAttribute("tabindex", "0");
-            video.setAttribute("controls", "");
 
             const errorMessage = document.createElement("p");
             errorMessage.textContent = "Votre navigateur ne peut pas lire le format de vidéo proposé. Pensez à le mettre à jour";
             video.appendChild(errorMessage);
-            imgContainer.appendChild(video);  
+            imgContainer.appendChild(video);
 
             const subtitles = document.createElement("track");
             subtitles.setAttribute("src", `images/photographersImages/${this.source.replace("mp4", "vtt")}`);
             subtitles.setAttribute("label", "French");
             subtitles.setAttribute("kind", "subtitles");
             subtitles.setAttribute("srclang", "fr");
+            subtitles.setAttribute("default", "");
             video.appendChild(subtitles);
             console.log(video);
 
