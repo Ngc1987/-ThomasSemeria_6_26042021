@@ -2,11 +2,7 @@
 ## OpenClassRooms
 
 ![Logo Fisheye](svg/logo.svg)
-<<<<<<< HEAD
 <img src="svg/logo.svg">
-=======
-
->>>>>>> indexhtml
 
 Pour ce projet, il s'agissait de mettre en place un site web pour une plateforme de photographes Freelance.
 Une page d'accueil affichant les différents photographes disponibles, et pour chacun une page affichant
@@ -40,8 +36,4 @@ nécessaires à la réalisation de ce projet.
 Mais quand on arrive à nos fins, les difficultés ne sont plus qu'un lointain souvenir, et
 la satisfaction d'y arriver et d'avoir appris de nouvelles choses prédomine.
 
-<<<<<<< HEAD
 Maintenant, place au projet 7 !!!
-=======
-Maintenant, place au projet 7 !!!
->>>>>>> indexhtml
