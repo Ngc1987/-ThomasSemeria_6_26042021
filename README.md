@@ -3,10 +3,13 @@
 
 ![Logo Fisheye](svg/logo.svg)
 <<<<<<< HEAD
+<<<<<<< HEAD
 <img src="svg/logo.svg">
 =======
 
 >>>>>>> indexhtml
+=======
+>>>>>>> main
 
 Pour ce projet, il s'agissait de mettre en place un site web pour une plateforme de photographes Freelance.
 Une page d'accueil affichant les différents photographes disponibles, et pour chacun une page affichant
@@ -41,7 +44,11 @@ Mais quand on arrive à nos fins, les difficultés ne sont plus qu'un lointain s
 la satisfaction d'y arriver et d'avoir appris de nouvelles choses prédomine.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 Maintenant, place au projet 7 !!!
 =======
 Maintenant, place au projet 7 !!!
 >>>>>>> indexhtml
+=======
+Maintenant, place au projet 7 !!!
+>>>>>>> main
