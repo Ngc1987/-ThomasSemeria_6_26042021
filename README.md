@@ -2,7 +2,6 @@
 ## OpenClassRooms
 
 ![Logo Fisheye](svg/logo.svg)
-<img src="svg/logo.svg">
 
 Pour ce projet, il s'agissait de mettre en place un site web pour une plateforme de photographes Freelance.
 Une page d'accueil affichant les différents photographes disponibles, et pour chacun une page affichant
