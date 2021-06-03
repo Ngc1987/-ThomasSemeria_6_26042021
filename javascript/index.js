@@ -3,14 +3,17 @@
 // ****************** ACCES PHOTOGRAPHES FICHIER JSON ****************************
 // *******************************************************************************
 
-fetch('./json/photographes.json').then(function(response) {
+fetch("./json/photographes.json").then(function(response) {
   // if(response.ok) {
     response.json().then(function(json) {
+      // eslint-disable-next-line no-undef
       photographData = json;
+      // eslint-disable-next-line no-undef
       photographers = json.photographers;
+      // eslint-disable-next-line no-undef
       photographMedia = json.medias;
       showPhotographers(json);
-      focusElements();
+      // focusElements();
     });
   // } else {
   //   console.log('Network request for products.json failed with response ' + response.status + ': ' + response.statusText);
@@ -20,9 +23,11 @@ fetch('./json/photographes.json').then(function(response) {
 const photographList = document.querySelector(".photographList");
 
 
-
+/**
+ * @param  {JSON} photographData // Tableau des photographes
+ */
 function showPhotographers(photographData) {
-  // const photographers = photographData["photographers"];
+  // eslint-disable-next-line no-undef
   for(let i = 0; i < photographers.length; i++) {
     
     // console.log(photographData["medias"]);
@@ -51,14 +56,20 @@ function showPhotographers(photographData) {
     price.setAttribute("class", "photographItem__descript__price");
     tagContainer.setAttribute("class", "photographItem__tags");
     
-
+    // eslint-disable-next-line no-undef
     link.setAttribute("href", `photographe.html?id=${photographers[i].id}`);
+    // eslint-disable-next-line no-undef
     img.setAttribute("src", `images/Photographs/${photographers[i].portrait}`);
+    // eslint-disable-next-line no-undef
     link.setAttribute("aria-label", `${photographers[i].name}`);
     img.setAttribute("alt", "");
+    // eslint-disable-next-line no-undef
     name.textContent = photographers[i].name;
+    // eslint-disable-next-line no-undef
     city.textContent = `${photographers[i].city}, ${photographers[i].country}`;
+    // eslint-disable-next-line no-undef
     phrase.textContent = photographers[i].tagline;
+    // eslint-disable-next-line no-undef
     price.textContent = `${photographers[i].price}€ / jour`;
 
 
@@ -71,8 +82,8 @@ function showPhotographers(photographData) {
       const tagLink = document.createElement("a");
       const span = document.createElement("span");
       span.textContent = `#${photographTag[t].toLowerCase()}`;
-      span.setAttribute("tabindex", 0)
-      item.classList.add(`${photographTag[t].toLowerCase()}`)
+      span.setAttribute("tabindex", 0);
+      item.classList.add(`${photographTag[t].toLowerCase()}`);
       tagContainer.appendChild(tagLink);
       tagLink.appendChild(span);
       tagLink.setAttribute("aria-label", `Filtrer les photographes avec le tag ${photographTag[t]}`);
@@ -98,17 +109,20 @@ function showPhotographers(photographData) {
   // ************************ TRI TAGS ***************************
 
   // Sélection de tous les photographes sur page index.html
-  const photographeList = document.querySelectorAll(".photographItem");
+  const photographeItem = document.querySelectorAll(".photographItem");
 
-  // Afficher les photographes selon le tag sélectionné en paramètre
+  
+  /**
+   * @param  {string} tagChoosen // Afficher les photographes selon le tag sélectionné en paramètre
+   */
   function showPhotographListByTag(tagChoosen) {
-    Array.from(photographeList).forEach(function(photographe) {
 
-      const photographTag = photographe.lastElementChild.childNodes;
-      // console.log(photographTag[0]);
+    Array.from(photographeItem).forEach(function(photographe) {
+
+        const photographTag = photographe.lastElementChild.childNodes;
 
         for(let tags = 0; tags < photographTag.length; tags++) {
-        
+
           const photographTagFormat = photographTag[tags].innerText.toLowerCase().substring(1);
 
           if(photographTagFormat.indexOf(tagChoosen) !== -1 || tagChoosen == null) {
@@ -121,7 +135,7 @@ function showPhotographers(photographData) {
             photographe.style.display = "none";
           }
         }
-    })
+    });
   }
 
 
@@ -145,15 +159,14 @@ function showPhotographers(photographData) {
 
       tag.addEventListener("keydown", (e) => {
 
-        console.log(e);
+        // console.log(e);
     
         if(e.code == "Enter" || e.code == "NumpadEnter") {
           const tagFilter = e.target.innerText.toLowerCase().substring(1);
-        // tagFilter.setAttribute("href", )
         // Appel de la fonction avec le tag sélectionné en paramètre
         showPhotographListByTag(tagFilter);
         }
-      })
+      });
   });
 
   
@@ -168,57 +181,57 @@ function showPhotographers(photographData) {
 
 }
 
-const keyCodes = {
-  tab: 9,
-  enter: 13,
-  escape: 27,
-  left: 37,
-  right: 39
-};
+// const keyCodes = {
+//   tab: 9,
+//   enter: 13,
+//   escape: 27,
+//   left: 37,
+//   right: 39
+// };
 
 
-function focusElements() {
-  // const topLink = document.querySelector("#topLink");
-  const logo = document.querySelector("#logo");
-  const tagContainer = document.querySelector("#tags");
-  const tags = tagContainer.children;
-  const title = document.querySelector("h1");
-  const photographerId = document.querySelector(".photographItem__id");
-  const photographerDescript = document.querySelector(".photographItem__descript");
-  const photographerContainerTags= document.querySelector(".photographItem__tags");
-  const photographTags = photographerContainerTags.children;
+// function focusElements() {
+//   // const topLink = document.querySelector("#topLink");
+//   const logo = document.querySelector("#logo");
+//   const tagContainer = document.querySelector("#tags");
+//   const tags = tagContainer.children;
+//   const title = document.querySelector("h1");
+//   const photographerId = document.querySelector(".photographItem__id");
+//   const photographerDescript = document.querySelector(".photographItem__descript");
+//   const photographerContainerTags= document.querySelector(".photographItem__tags");
+//   const photographTags = photographerContainerTags.children;
 
-  const focusablesElements = [topLink, logo, tags, title, photographerId, photographerDescript, photographTags];
+//   const focusablesElements = [topLink, logo, tags, title, photographerId, photographerDescript, photographTags];
 
-  const firstFocusableElement = focusablesElements[0];
-  const lastFocusableElement = focusablesElements[focusablesElements.length - 1];
+//   const firstFocusableElement = focusablesElements[0];
+//   const lastFocusableElement = focusablesElements[focusablesElements.length - 1];
 
 
-  firstFocusableElement.focus();
+//   firstFocusableElement.focus();
 
-  focusablesElements.forEach((focusableElement) => {
-    if (focusableElement.addEventListener) {
-      focusableElement.addEventListener('keydown', (event) => {
-        const tab = event.which === keyCodes.tab;
+//   focusablesElements.forEach((focusableElement) => {
+//     if (focusableElement.addEventListener) {
+//       focusableElement.addEventListener("keydown", (event) => {
+//         const tab = event.which === keyCodes.tab;
 
-        if (!tab) {
-          return;
-        }
+//         if (!tab) {
+//           return;
+//         }
 
-        if (event.shiftKey) {
-          if (event.target === firstFocusableElement) { // shift + tab
-            event.preventDefault();
+//         if (event.shiftKey) {
+//           if (event.target === firstFocusableElement) { // shift + tab
+//             event.preventDefault();
 
-            lastFocusableElement.focus();
-          }
-        } else if (event.target === lastFocusableElement) { // tab
-          event.preventDefault();
+//             lastFocusableElement.focus();
+//           }
+//         } else if (event.target === lastFocusableElement) { // tab
+//           event.preventDefault();
 
-          firstFocusableElement.focus();
-        }
-      });
-    }
-  });
+//           firstFocusableElement.focus();
+//         }
+//       });
+//     }
+//   });
 
-  console.log(photographTags);
-}
+//   console.log(photographTags);
+// }

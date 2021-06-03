@@ -7,12 +7,12 @@
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.3/css/all.css" integrity="sha384-SZXxX4whJ79/gErwcOYf+zWLeJdY/qpuqC4cAa9rOGUstPomtqpuNWT9wdPEn2fk" crossorigin="anonymous">
     
-    <title>Document</title>
+    <title>Fisheye</title>
 </head>
 <body>
 
     <header>
-        <a href="index.html" aria-label="Logo Fisheye et lien vers page d'accueil"><div id="logo" alt="Lien vers page d'accueil"></div></a>
+        <a href="index.html" aria-label="Logo Fisheye et lien vers page d'accueil"><div id="logo" title="Lien vers page d'accueil"></div></a>
     </header>
 
 
@@ -24,17 +24,17 @@
             <article class="photographPage__head">
 
                 <section class="photographPage__head__descript">
-                    <h1 class="photographPage__head__descript--name"></h1>
+                    <h1 class="photographPage__head__descript-name"></h1>
                     <div tabindex="0">
-                        <div class="photographPage__head__descript--city"></div>
-                        <div class="photographPage__head__descript--phrase"></div>
+                        <div class="photographPage__head__descript-city"></div>
+                        <div class="photographPage__head__descript-phrase"></div>
                     </div>
-                    <div class="photographPage__head__descript--tags"></div>
+                    <div class="photographPage__head__descript-tags"></div>
                 </section>
                 <button class="contact" type="button" aria-haspopup="dialog" aria-controls="dialog" aria-label="Contactez moi">Contactez-moi</button>
 
                 <section class="photographPage__head__id">
-                    <div class="photographPage__head__id--photo">
+                    <div class="photographPage__head__id-photo">
                     </div>
                 </section>
                 <!-- <div class="contact"> -->
@@ -54,16 +54,16 @@
         <article class="sortWrapper">
             <section tabindex="0" id="sortby">Trier par</section>
 
-            <section class="sortWrapper__select" role="button" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="sortby" tabindex="0">
+            <section class="sortWrapper__select" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="sortby" tabindex="0">
 
-                <div class="sortWrapper__select--trigger"><span>Popularité</span>
+                <div class="sortWrapper__select-trigger"  role="button"><span>Popularité</span>
                     <div class="arrow"></div>
                 </div>
 
                 <div class="sortWrapper__options">
-                    <span class="sortWrapper__options--value selected" data-value="popularite" tabindex="-1">Popularité</span>
-                    <span class="sortWrapper__options--value" data-value="date" tabindex="-1">Date</span>
-                    <span class="sortWrapper__options--value" data-value="titre" tabindex="-1">Titre</span>
+                    <span class="sortWrapper__options-value selected" data-value="popularite" tabindex="-1">Popularité</span>
+                    <span class="sortWrapper__options-value" data-value="date" tabindex="-1">Date</span>
+                    <span class="sortWrapper__options-value" data-value="titre" tabindex="-1">Titre</span>
                 </div>
 
             </section>
@@ -76,10 +76,10 @@
                 <div classe="image"><img src="images/photographersImages/Travel_Lonesome.jpg" alt=""></div>
 
                 <div class="gallery__sample__descript">
-                    <div class="gallery__sample__descript--name">Solitude</div>
-                    <div class="gallery__sample__descript--price">70 €</div>
-                    <div class="gallery__sample__descript--like unliked">12</div>
-                    <i class="fas fa-heart gallery__sample__descript--heart unliked"></i>
+                    <div class="gallery__sample__descript-name">Solitude</div>
+                    <div class="gallery__sample__descript-price">70 €</div>
+                    <div class="gallery__sample__descript-like unliked">12</div>
+                    <i class="fas fa-heart gallery__sample__descript-heart unliked"></i>
 
                 </div>
             </article> -->
@@ -89,23 +89,23 @@
         
 
 
-        <article class="preview-box" aria-hidden="true" role="dialog" tabindex="-1">
+        <div class="preview-box" aria-hidden="true" role="dialog">
             
             <section class="imgBox">
-                <section class="imgBox__slide prev" tabindex="0">
+                <section class="imgBox__slide prev">
                     <i class="fas fa-chevron-left"></i>
                 </section>
-                <section class="imgBox__slide next" tabindex="0">
+                <section class="imgBox__slide next">
                     <i class="fas fa-chevron-right"></i>
                 </section>
                 <section class="current-img">
                     <img src="images/photographersImages/Travel_Lonesome.jpg" alt="">
                 </section>
-                <section tabindex="0">
+                <section>
                 <i class="imgBox__close fas fa-times"></i>
             </section>
             </section>
-        </article>
+        </div>
 
         <div class="shadow">
         
@@ -113,32 +113,32 @@
 
     </main>
 
-    <article id="dialog" role="dialog" aria-label="Formulaire de contact" aria-modal="true" aria-hidden="true" tabindex="-1" class="dialog">
+    <div id="dialog" role="dialog" aria-label="Formulaire de contact" aria-modal="true" aria-hidden="true" tabindex="-1" class="dialog">
         <div role="document" class="dialog__box">
-            <h2 class="dialog__box--name">Contactez-moi</h2>
-            <h2 class="dialog__box--contact"></h2>
-            <button type="button" aria-label="Fermer" title="Fermer cette fenêtre modale" data-dismiss="dialog" class="dialog__box--close">X</button>
+            <h2 class="dialog__box-name">Contactez-moi</h2>
+            <h2 class="dialog__box-contact"></h2>
+            <button type="button" aria-label="Fermer" title="Fermer cette fenêtre modale" data-dismiss="dialog" class="dialog__box-close">X</button>
 
-            <form action="" method="POST" class="dialog__box--modal" id="formulaire">
+            <form action="." method="POST" class="dialog__box-modal" id="formulaire">
                 <label for="prenom">Prénom</label><br />
-                <input type="text" min="2" id="prenom" name="prenom" required aria-required="true">
+                <input type="text" id="prenom" name="prenom" required>
                 <span id="prenomErreur" class="error"></span>
     
                 <label for="nom">Nom</label><br />
-                <input type="text" id="nom" name="nom" required aria-required="true">
+                <input type="text" id="nom" name="nom" required>
                 <span id="nomErreur" class="error"></span>
     
                 <label for="email">Email</label><br />
-                <input type="email" id="email" name="email" required aria-required="true">
+                <input type="email" id="email" name="email" required>
                 <span id="emailErreur" class="error"></span>
     
                 <label for="msg">Votre message</label><br />
-                <textarea type="text" id="msg" name="msg" rows="4"></textarea>
+                <textarea id="msg" name="msg" rows="4"></textarea>
     
                 <button type="submit" id="submit">Envoyer</button>
             </form>
         </div>
-    </article>
+    </div>
 
     <!-- <div class="modal">
 

@@ -1,4 +1,3 @@
-
 // ****************** BOUTON SUBMIT **************************************
 const submitBtn = document.querySelector("#submit");
 const prenom = document.querySelector("#prenom");
@@ -10,7 +9,7 @@ submitBtn.onclick = function(e) {
   console.log(prenom.value);
   console.log(nom.value);
   console.log(email.value);
-}
+};
 
 
 
@@ -18,16 +17,16 @@ submitBtn.onclick = function(e) {
 // ******************* OUVERTURE FENETRE MODALE **************************
 // Récupérer les composants de type aria-haspopup="dialog" d1 document
 // ainsi que les fenêtres modales liées
-const triggers = document.querySelectorAll('[aria-haspopup="dialog"]');
-const doc = document.querySelector('.js-document');
+const triggers = document.querySelectorAll("[aria-haspopup='dialog']");
+const doc = document.querySelector(".js-document");
 // Selection de tous les éléments focalisables de la modale
 const focusableElementsArray = [
-  '[href]',
-  'button:not([disabled])',
-  'input:not([disabled])',
-  'select:not([disabled])',
-  'textarea:not([disabled])',
-  '[tabindex]:not([tabindex="-1"])',
+  "[href]",
+  "button:not([disabled])",
+  "input:not([disabled])",
+  "select:not([disabled])",
+  "textarea:not([disabled])",
+  "[tabindex]:not([tabindex='-1'])",
 ];
 const keyCodes = {
   tab: 9,
@@ -41,8 +40,8 @@ const keyCodes = {
   const firstFocusableElement = focusableElements[0];
   const lastFocusableElement = focusableElements[focusableElements.length - 1];
 
-  dialog.setAttribute('aria-hidden', false);
-  doc.setAttribute('aria-hidden', true);
+  dialog.setAttribute("aria-hidden", false);
+  doc.setAttribute("aria-hidden", true);
 
   // return si pas d'élément focusable
   if (!firstFocusableElement) {
@@ -56,7 +55,7 @@ const keyCodes = {
     // trapping focus inside the dialog
     focusableElements.forEach((focusableElement) => {
       if (focusableElement.addEventListener) {
-        focusableElement.addEventListener('keydown', (event) => {
+        focusableElement.addEventListener("keydown", (event) => {
           const tab = event.which === keyCodes.tab;
 
           if (!tab) {
@@ -82,26 +81,26 @@ const keyCodes = {
 // Fonction close qui passe l'attribut aria-hidden à true pour 
 // pouvoir fermer la modale et réactiver le document principal
 const close = function (dialog, trigger) {
-  dialog.setAttribute('aria-hidden', true);
-  doc.setAttribute('aria-hidden', false);
+  dialog.setAttribute("aria-hidden", true);
+  doc.setAttribute("aria-hidden", false);
 
   // restoring focus
   trigger.focus();
 };
 
 triggers.forEach((trigger) => {
-  const dialog = document.getElementById(trigger.getAttribute('aria-controls'));
+  const dialog = document.getElementById(trigger.getAttribute("aria-controls"));
   // Récupérer éléments ayant data-dismiss en attribut (boutons de fermeture) et appeler la fonction close
-  const dismissTriggers = dialog.querySelectorAll('[data-dismiss]');
+  const dismissTriggers = dialog.querySelectorAll("[data-dismiss]");
 
   // Au clic donc du trigger, on envoie la fonction (open)
-  trigger.addEventListener('click', (event) => {
+  trigger.addEventListener("click", (event) => {
     event.preventDefault();
 
     open(dialog);
   });
 
-  trigger.addEventListener('keydown', (event) => {
+  trigger.addEventListener("keydown", (event) => {
     if (event.which === keyCodes.enter) {
       event.preventDefault();
 
@@ -110,7 +109,7 @@ triggers.forEach((trigger) => {
   });
 
   // close dialog
-  dialog.addEventListener('keydown', (event) => {
+  dialog.addEventListener("keydown", (event) => {
     if (event.which === keyCodes.escape) {
       close(dialog, trigger);
     }      
@@ -119,14 +118,14 @@ triggers.forEach((trigger) => {
   dismissTriggers.forEach((dismissTrigger) => {
     const dismissDialog = document.getElementById(dismissTrigger.dataset.dismiss);
 
-    dismissTrigger.addEventListener('click', (event) => {
+    dismissTrigger.addEventListener("click", (event) => {
       event.preventDefault();
 
       close(dismissDialog, trigger);
     });
   });
 
-  window.addEventListener('click', (event) => {
+  window.addEventListener("click", (event) => {
     if (event.target === dialog) {
       close(dialog, trigger);
     }
@@ -141,57 +140,57 @@ triggers.forEach((trigger) => {
 //**********************************************************************//
 //*************************   CHAMP PRENOM   ***************************//
 //**********************************************************************//
-prenom.addEventListener('change', function() {
+prenom.addEventListener("change", function() {
   validPrenom(this);
-})
+});
 
 const validPrenom = function (inputPrenom) {
 
   let prenomErreur = document.getElementById("prenomErreur");
-  let prenomRegExp = new RegExp ('^[a-zA-Z]{2}[a-zA-Z-\'éèêàâôöïäüÊÈ]*$','g');
+  let prenomRegExp = new RegExp ("^[a-zA-Z]{2}[a-zA-Z-'éèêàâôöïäüÊÈ]*$","g");
   let testPrenom = prenomRegExp.test(inputPrenom.value);
   // console.log(testPrenom); 
 
   if (testPrenom) {
-      prenomErreur.innerHTML ='';
+      prenomErreur.innerHTML ="";
       return true;
   } else {
-      prenomErreur.innerHTML = 'Veuillez saisir uniquement des lettres et 2 caractères minimum';
+      prenomErreur.innerHTML = "Veuillez saisir uniquement des lettres et 2 caractères minimum";
       return false;
-  };
-}
+  }
+};
 
 //**********************************************************************//
 //***************************   CHAMP NOM   ****************************//
 //**********************************************************************//
 //*****************   Ecouter la modification du nom   *****************//
-nom.addEventListener('change', function() {
+nom.addEventListener("change", function() {
   validNom(this);
-})
+});
 
 const validNom = function (inputNom) {
 
   let nomErreur = document.getElementById("nomErreur");
-  let nomRegExp = new RegExp ('^[a-zA-Z]{2}[a-zA-Z-\'éèêàâôöïäüÊÈ]*$','g');
+  let nomRegExp = new RegExp ("^[a-zA-Z]{2}[a-zA-Z-'éèêàâôöïäüÊÈ]*$","g");
   let testNom = nomRegExp.test(inputNom.value);
   // console.log(testNom); 
 
   if (testNom) {
-      nomErreur.innerHTML ='';
+      nomErreur.innerHTML = "";
       return true;
   } else {
-      nomErreur.innerHTML = 'Veuillez saisir uniquement des lettres et 2 caractères minimum';
+      nomErreur.innerHTML = "Veuillez saisir uniquement des lettres et 2 caractères minimum";
       return false;
-  };
-}
+  }
+};
 //**********************************************************************//
 //*************************   CHAMP EMAIL   ****************************//
 //**********************************************************************//
 //**************   Ecouter la modification de l'email   ****************//
-email.addEventListener('change', function() {
+email.addEventListener("change", function() {
   validEmail(this);
   console.log(email);
-})
+});
 
 //*** Fonction verification email pendant la saisie de l'utilisateur ***//
 const validEmail = function (inputEmail) {
@@ -199,7 +198,7 @@ const validEmail = function (inputEmail) {
   // emailErreur correspond à un span dans le html qui servira à afficher notre message d'erreur
   let emailErreur = document.getElementById("emailErreur");
   // La RegExp correspondant à ce champ
-  let emailRegExp = new RegExp ('^[a-zA-Z0-9.-_]+[@]{1}[a-zA-Z0-9.-_]+[.]{1}[a-z]{2,10}$','g');
+  let emailRegExp = new RegExp ("^[a-zA-Z0-9.-_]+[@]{1}[a-zA-Z0-9.-_]+[.]{1}[a-z]{2,10}$","g");
   // On teste si la valeur saisie dans l'input respecte la RegExp correspondante
   let testEmail = emailRegExp.test(inputEmail.value);
   // console.log(inputEmail.value); 
@@ -210,11 +209,10 @@ const validEmail = function (inputEmail) {
   // Donc si testEmail est true, on renvoie true, sinon on renvoie false et fait apparaître
   // un message d'erreur
   if (testEmail) {
-    emailErreur.innerHTML = '';
+    emailErreur.innerHTML = "";
       return true;
   } else {
-      emailErreur.innerHTML = 'Email invalide';
+      emailErreur.innerHTML = "Email invalide";
       return false;
-      submitBtn.disabled = true;
-  };
   }
+};

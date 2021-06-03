@@ -306,25 +306,25 @@ header {
             flex-direction: column;
             margin-left: 50px;
 
-            &--name {
+            &-name {
                 font-size: 64px;
                 font-weight: 300;
                 margin: 0;
                 color: $secondary;
             }
 
-            &--city {
+            &-city {
                 font-size: 24px;
                 color: $primary;
             }
 
-            &--phrase {
+            &-phrase {
                 font-size: 18px;
                 color: #525252;
                 margin-top: 15px;
             }
 
-            &--tags {
+            &-tags {
                 display: flex;
                 flex-direction: row;
                 flex-wrap: wrap;
@@ -366,11 +366,11 @@ header {
             position: absolute;
             right: 50px;
 
-            // &--photo {
+            // &-photo {
             //     // margin-right: 30px;
             // }
     
-            &--photo img{
+            &-photo img{
                 width: 200px;
                 height: 200px;
                 object-fit: cover;                
@@ -406,10 +406,9 @@ header {
         top: 0px;
         display: flex;
         flex-direction: column;
-        border: 0 2px solid #394a6d;
         border-radius: 10px;
 
-        &--trigger {
+        &-trigger {
             position: relative;
             display: flex;
             align-items: center;
@@ -421,7 +420,6 @@ header {
             height: 60px;
             background: $primary;
             cursor: pointer;
-            border: 2px 0 solid $primary;
             transition: all 0.4s ease;
 
             &:hover {
@@ -441,7 +439,6 @@ header {
         top: 100%;
         left: 0;
         right: 0;
-        border: 2px solid $primary;
         border-top: 0;
         background: $primary;
         transition: all 0.5s;
@@ -450,7 +447,7 @@ header {
         pointer-events: none;
         z-index: 2;
 
-        &--value {
+        &-value {
             position: relative;
             display: block;
             padding: 0 22px;
@@ -632,24 +629,18 @@ header {
             overflow: hidden;
             text-overflow: ellipsis;
                 
-            &--name {
+            &-name {
                 flex-grow: 3;
                 font-weight: 400;
                 color: $primary;
                 font-size: 24px;
+                margin: 0;
                 white-space: nowrap;
                 overflow: hidden;
                 text-overflow: ellipsis;
             }
 
-            &--price {
-                font-weight: 500;
-                color: $primary;
-                font-size: 24px;
-                margin-right: 15px;
-            }
-
-            &--like {
+            &-like {
                 font-weight: 500;
                 font-size: 24px;
                 color: $primary;
@@ -659,7 +650,7 @@ header {
 
             
 
-            &--heart {
+            &-heart {
                 color: $primary;
                 font-size: 20px;
                 padding: 0 5px;
@@ -787,7 +778,7 @@ header {
 .preview-box.show {
     opacity: 1;
     transform: translate(-50%, -50%) scale(1);
-    pointer-events: auto;
+    pointer-events: all;
     transition: all 0.4s ease;
 }
 // .preview-box .details {
@@ -832,10 +823,6 @@ header {
         line-height: 50px;
         text-align: center;
         z-index: 3;
-
-        &:focus {
-            font-size: 55px;
-        }
     }
 
     .prev {
@@ -925,7 +912,7 @@ header {
         flex-direction: column;
         position: relative;
 
-        &--name, &--contact {
+        &-name, &-contact {
             font-weight: 400;
             font-size: 45px;
             margin-top: 20px;
@@ -933,7 +920,7 @@ header {
             
         }
 
-        &--close {
+        &-close {
             font-size: 30px;
             width: 40px;
             height: 40px;
@@ -952,7 +939,7 @@ header {
             }
         }
 
-        &--modal {
+        &-modal {
             display: flex;
             flex-direction: column;
 
@@ -1023,7 +1010,7 @@ header {
         bottom: 30px;
     }
 
-    .photographPage__head__id--photo {
+    .photographPage__head__id-photo {
         margin-top: -35px;
     }
     
@@ -1063,11 +1050,11 @@ header {
         width: 150px;
         height: 150px;
     }
-    .photographPage__head__id--photo img {
+    .photographPage__head__id-photo img {
         height: 150px;
         width: 150px;
     }
-    .photographPage__head__id--photo {
+    .photographPage__head__id-photo {
         margin-top: 0px;
     }
     .contact {
@@ -1083,23 +1070,23 @@ header {
         font-size: 18px;
         z-index: 1;
     }
-    .sortWrapper__select--trigger {
+    .sortWrapper__select-trigger {
         height: 40px;
         border-radius: 5px;
     }
-    .photographPage__head__descript--name {
+    .photographPage__head__descript-name {
         font-size: 36px;
     }
-    .photographPage__head__descript--city {
+    .photographPage__head__descript-city {
         font-size: 13px;
     }
     .photographPage__head {
         background: #fff;
     }
-    .photographPage__head__descript--phrase {
+    .photographPage__head__descript-phrase {
         font-size: 13px;
     }
-    .photographPage__head__descript--tags a {
+    .photographPage__head__descript-tags a {
         font-size: 13px;
     }
     // .photographPage__head__id {
@@ -1130,7 +1117,7 @@ header {
         // height: 100px;
         // width: 100px;
     }
-    // .photographPage__head__id--photo img {
+    // .photographPage__head__id-photo img {
     //     height: 100px;
     //     width: 100px;
     // }
@@ -1147,14 +1134,14 @@ header {
         height: 100px;
         width: 100px;
     }
-    .photographPage__head__id--photo img {
+    .photographPage__head__id-photo img {
         height: 100px;
         width: 100px;
     }
-    .photographPage__head__descript--phrase {
+    .photographPage__head__descript-phrase {
         margin-top: 5px;
     }
-    .photographPage__head__descript--tags {
+    .photographPage__head__descript-tags {
         margin-top: 3px;
         margin-left: -5px;
     }

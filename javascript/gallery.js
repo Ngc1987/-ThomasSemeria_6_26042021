@@ -8,7 +8,12 @@ if (params && params.get("id")) {
 
     fetchPhotographer(photographerId).then(function(result) {
         if(result === undefined) {
+            // const doc = document.querySelector(".js-document");
             // Prévoir une erreur (Cas de figure si id ne correspond à personne)
+            // const errorMessage = document.createElement("h1");
+            // errorMessage.innerHTML = "L'ID de ce photographe n'existe pas";
+            // doc.appendChild(errorMessage);
+            // console.log(result);
         } else {
             // console.log(result);
 
@@ -16,18 +21,18 @@ if (params && params.get("id")) {
                 // console.log(mediaList);
                 const newList = mediaList.map((element) => {
                     return new Media(element);
-                })
+                });
                 console.log(newList);
 
                 // console.log(newList);
                 sortBy(newList);
                 showGallery(newList);
-                openLightbox();
+                lightbox();
                 liking();
                 showTotalLikesAndPrice();
             });
         }
-    })
+    });
 } else {
         // Prévoir une erreur (fonction)
 }
@@ -37,66 +42,83 @@ function fetchPhotographer(photographerId) {
 
     return new Promise((resolve, reject) => {
 
-        fetch('./json/photographes.json').then(function(response) {
+        fetch("./json/photographes.json").then(function(response) {
         
             response.json().then(function(json) {
-    
+                // eslint-disable-next-line no-undef
                 photographData = json;
+                // eslint-disable-next-line no-undef
                 const result = photographData.photographers.find(data => data.id == photographerId);
                 console.log(result);
                 showHeaderPhotograph(photographerId);
-              
-                resolve(result);
+
+                if(result) {
+                    resolve(result);
+                } else {
+                    reject();
+                }
             });
         });
-    })
+    });
 }
 /**
  * @param  {} photographerId
  */
 function showHeaderPhotograph(photographerId) {
+    // eslint-disable-next-line no-undef
     console.log(photographData.photographers);
     console.log(photographerId);
-
+    // eslint-disable-next-line no-undef
     const photographers = photographData.photographers;
-
+    // eslint-disable-next-line no-undef
     for(i= 0; i < photographers.length; i++) {
-
+        // eslint-disable-next-line no-undef
         if(photographers[i].id == photographerId) {
 
-            const name = document.querySelector(".photographPage__head__descript--name");
-            const city = document.querySelector(".photographPage__head__descript--city");
-            const phrase = document.querySelector(".photographPage__head__descript--phrase");
-            const tags = document.querySelector(".photographPage__head__descript--tags");
-            const nameOnDialogBox = document.querySelector(".dialog__box--contact");
+            const name = document.querySelector(".photographPage__head__descript-name");
+            const city = document.querySelector(".photographPage__head__descript-city");
+            const phrase = document.querySelector(".photographPage__head__descript-phrase");
+            const tags = document.querySelector(".photographPage__head__descript-tags");
+            const nameOnDialogBox = document.querySelector(".dialog__box-contact");
+            // eslint-disable-next-line no-undef
             name.innerHTML = photographers[i].name;
             name.setAttribute("tabindex", "0");
+            // eslint-disable-next-line no-undef
             city.innerHTML = `${photographers[i].city}, ${photographers[i].country}`;
+            // eslint-disable-next-line no-undef
             phrase.innerHTML = photographers[i].tagline;
+            // eslint-disable-next-line no-undef
             nameOnDialogBox.innerHTML = photographers[i].name;
-
+            // eslint-disable-next-line no-undef
             const photographersTags = photographers[i].tags;
-
+            // eslint-disable-next-line no-undef
             for(tag = 0; tag < photographersTags.length; tag++) {
 
                 const tagLink = document.createElement("a");
+                // eslint-disable-next-line no-undef
                 tagLink.setAttribute("href", `index.html?tag=${photographersTags[tag]}`);
+                // eslint-disable-next-line no-undef
                 tagLink.setAttribute("aria-label", `Retour à la liste des photographes filtrés avec le tag ${photographersTags[tag]}`);
+                // eslint-disable-next-line no-undef
                 tagLink.textContent = `#${photographersTags[tag].toLowerCase()}`;
                 tags.appendChild(tagLink);
             }
 
-            const photo = document.querySelector(".photographPage__head__id--photo");
+            const photo = document.querySelector(".photographPage__head__id-photo");
             const photographerPortrait = document.createElement("img");
+            // eslint-disable-next-line no-undef
             photographerPortrait.setAttribute("src", `images/Photographs/${photographers[i].portrait}`);
+            // eslint-disable-next-line no-undef
             photographerPortrait.setAttribute("aria-label", photographers[i].name);
             photographerPortrait.setAttribute("tabindex", "0");
             photo.appendChild(photographerPortrait);
 
 
             const photographPrice = document.querySelector(".likeAndPrice__price");
+            // eslint-disable-next-line no-undef
             photographPrice.innerHTML = `${photographers[i].price}€ / jour`;
-            photographPrice.setAttribute("tabindex", "0")
+            photographPrice.setAttribute("tabindex", "0");
+            // eslint-disable-next-line no-undef
             photographPrice.setAttribute("aria-label", `Ses services vous seront facturés ${photographers[i].price} euros par jour`);
         }
     }
@@ -105,23 +127,23 @@ function showHeaderPhotograph(photographerId) {
 
 function fetchMediaByPhotographer(photographerId) {
 
-    return new Promise((resolve, reject) => {
+    return new Promise((resolve) => {
 
-        fetch('./json/photographes.json').then(function(response) {
+        fetch("./json/photographes.json").then(function(response) {
         
             response.json().then(function(json) {
-    
-              photographData = json;
-              const result = photographData.media.filter(data => data.photographerId == photographerId);
+                // eslint-disable-next-line no-undef
+                photographData = json;
+                // eslint-disable-next-line no-undef
+                const result = photographData.media.filter(data => data.photographerId == photographerId);
 
-              console.log(result);
-              resolve(result);
-            //   sortBy(result);
+                console.log(result);
+                resolve(result);
+                //   sortBy(result);
 
             });
         });
-    })
-
+    });
 }
 
 
@@ -165,61 +187,61 @@ class Media {
         descript.setAttribute("class", "gallery__sample__descript");
         
 
-        const name = document.createElement("section");
-        name.setAttribute("class", "gallery__sample__descript--name");
+        const name = document.createElement("h2");
+        name.setAttribute("class", "gallery__sample__descript-name");
         name.innerHTML = this.title;
         name.setAttribute("aria-label", this.title);
         name.setAttribute("tabindex", "0");
 
         // const price = document.createElement("div");
-        // price.setAttribute("class", "gallery__sample__descript--price");
+        // price.setAttribute("class", "gallery__sample__descript-price");
         // price.innerHTML = this.price;
         
 
         const like = document.createElement("section");
-        like.setAttribute("class", "gallery__sample__descript--like unliked");
+        like.setAttribute("class", "gallery__sample__descript-like unliked");
         like.innerHTML = this.likes;
         like.setAttribute("tabindex", "0");
-        like.setAttribute("aria-label", `likes`);
+        like.setAttribute("aria-label", "likes");
 
 
         const heart = document.createElement("i");
-        heart.setAttribute("class", "fas fa-heart gallery__sample__descript--heart unliked");
+        heart.setAttribute("class", "fas fa-heart gallery__sample__descript-heart unliked");
 
         
         if(this.source.includes("mp4")) {
             const video = document.createElement("video");
             video.setAttribute("src", "images/photographersImages/"+ this.source);
             video.setAttribute("poster", `images/photographersImages/mini${this.source.replace("mp4", "jpg")}`);
-            video.setAttribute("aria-label", this.title);
+            // video.setAttribute("aria-label", this.title);
             video.setAttribute("alt", this.title);
             video.setAttribute("tabindex", "0");
-
-            const errorMessage = document.createElement("p");
-            errorMessage.textContent = "Votre navigateur ne peut pas lire le format de vidéo proposé. Pensez à le mettre à jour";
-            video.appendChild(errorMessage);
+            
             imgContainer.appendChild(video);
 
             const subtitles = document.createElement("track");
             subtitles.setAttribute("src", `images/photographersImages/${this.source.replace("mp4", "vtt")}`);
-            subtitles.setAttribute("label", "French");
+            subtitles.setAttribute("label", "Français");
             subtitles.setAttribute("kind", "subtitles");
             subtitles.setAttribute("srclang", "fr");
             subtitles.setAttribute("default", "");
             video.appendChild(subtitles);
+            const errorMessage = document.createElement("p");
+            errorMessage.textContent = "Votre navigateur ne peut pas lire le format de vidéo proposé. Pensez à le mettre à jour";
+            video.appendChild(errorMessage);
             console.log(video);
 
             video.onclick = function() {
                 video.setAttribute("controls", "");
                 video.setAttribute("autoplay", "");
-            }
+            };
         }
 
         if(this.source.includes("jpg")) {
             const image = document.createElement("img");
             image.setAttribute("src", "images/photographersImages/"+ this.source);  
             image.setAttribute("alt", this.title);  
-            image.setAttribute("aria-label", this.title);
+            // image.setAttribute("aria-label", this.title);
             image.setAttribute("tabindex", "0");  
             span.appendChild(image);
         }
@@ -237,8 +259,7 @@ class Media {
 }
 
 
-
-function openLightbox() { 
+function lightbox() { 
     
     // Selection des éléments requis
     const gallery = document.querySelectorAll(".gallery__sample img, video"),
@@ -249,21 +270,21 @@ function openLightbox() {
     shadow = document.querySelector(".shadow");// Une fois la fenêtre chargée
     
     for(let i = 0; i < gallery.length; i++) {
-
-
         const prevBtn = document.querySelector(".prev");
         const nextBtn = document.querySelector(".next");
 
-        
+
 
         let newIndex = i; // On passe i comme valeur à la variable newIndex
         let clickImgIndex;
 
-        gallery[i].onclick = () => {
+        
 
-            
-            previewBox.setAttribute('aria-hidden', false);
-            doc.setAttribute('aria-hidden', true);
+        const openLightBox = () => {
+
+            previewBox.setAttribute("aria-hidden", false);
+            // eslint-disable-next-line no-undef
+            doc.setAttribute("aria-hidden", true);
 
             // prevBtn.focus();  
             clickImgIndex = newIndex; // On passe l'index de l'image cliquée à la variable clickImgIndex
@@ -318,20 +339,21 @@ function openLightbox() {
             nextBtn.addEventListener("click", next); 
 
             previewBox.classList.add("show");
-            shadow.style.display = "block"
+            shadow.style.display = "block";
             document.querySelector("body").style.overflow = "hidden";
 
             
             function closeLightBox() {
 
-                previewBox.setAttribute('aria-hidden', true);
-                doc.setAttribute('aria-hidden', false);
+                previewBox.setAttribute("aria-hidden", true);
+                // eslint-disable-next-line no-undef
+                doc.setAttribute("aria-hidden", false);
 
                 previewBox.classList.remove("show");
                 prevBtn.style.display = "block";
                 nextBtn.style.display = "block";
                 newIndex = clickImgIndex; // Assigner index de la première image cliquée à la variable newIndex
-                shadow.style.display = "none"
+                shadow.style.display = "none";
                 document.querySelector("body").style.overflow = "auto";
             }
 
@@ -351,8 +373,17 @@ function openLightbox() {
                 if(e.code == "Escape") {
                     closeLightBox();
                 }
-            })
-        };    
+            });
+        };
+
+        gallery[i].addEventListener("click", openLightBox);
+
+        gallery[i].addEventListener("keydown", (e) => {
+            // console.log(e.code);
+            if(e.code == "Enter" || e.code == "NumpadEnter") {
+                openLightBox();
+            }
+        });
     }
 }
 
@@ -365,8 +396,8 @@ function showGallery(list) {
     // const galleryContainer = document.querySelector(".gallery");
 
     list.forEach((media) => {
-        galleryContainer.appendChild(media.getHtml())
-    })
+        galleryContainer.appendChild(media.getHtml());
+    });
 
     // sortBy(list);
 }
@@ -374,7 +405,7 @@ function showGallery(list) {
 
 function liking() {
     
-    const likes = document.querySelectorAll(".gallery__sample__descript--like");
+    const likes = document.querySelectorAll(".gallery__sample__descript-like");
 
     likes.forEach(like => {
 
@@ -386,12 +417,12 @@ function liking() {
             if(e.code == "Enter" || e.code == "NumpadEnter") {
                 classToggle();
             }
-        })
+        });
         
         function classToggle() {
 
-            like.classList.toggle('liked');
-            like.classList.toggle('unliked');
+            like.classList.toggle("liked");
+            like.classList.toggle("unliked");
 
             if(like.classList.contains("liked")) {
                 like.innerText ++ ;
@@ -417,20 +448,20 @@ function liking() {
 function showTotalLikesAndPrice() {
 
     const totalLikes = document.querySelector(".likeAndPrice__like");
-    const likes = document.querySelectorAll(".gallery__sample__descript--like");
+    const likes = document.querySelectorAll(".gallery__sample__descript-like");
     
 
     let sum = 0;
-
+        // eslint-disable-next-line no-undef
         for(like = 0; like < likes.length; like++){
-
+            // eslint-disable-next-line no-undef
             let likeValue = parseInt(likes[like].textContent);
             // console.log(likeValue);
         
             sum = sum + likeValue;
     }
 
-    totalLikes.innerHTML = sum + ` <i class="fas fa-heart"></i>`;
+    totalLikes.innerHTML = sum + " <i class='fas fa-heart'></i>";
     totalLikes.setAttribute("tabindex", "0");
     totalLikes.setAttribute("aria-label", `En cumulé, les oeuvres de ce photographe on été aimées ${sum} fois.`);
 }
@@ -441,42 +472,38 @@ function showTotalLikesAndPrice() {
 const sortWrapper = document.querySelector(".sortWrapper");
 const sortSelect = document.querySelector(".sortWrapper__select");
 
-const sortButton = document.querySelector(".sortWrapper__select--trigger");
-const beforeAfter = document.querySelector(".arrow");
+const sortButton = document.querySelector(".sortWrapper__select-trigger");
 
 sortButton.addEventListener("mouseenter", () => {
     sortSelect.classList.toggle("black");
-})
+});
 sortButton.addEventListener("mouseleave", () => {
     sortSelect.classList.toggle("black");
-})
+});
 
-// sortWrapper.addEventListener("click", function() {
-//   sortSelect.classList.toggle("open");
-// })
 function sortBy(newList) { 
 
 
-    sortWrapper.addEventListener('click', openSortWrapper);
+    sortWrapper.addEventListener("click", openSortWrapper);
     sortWrapper.addEventListener("keydown", (e) => {
         if(e.code == "NumpadEnter" || e.code == "Enter") {
             openSortWrapper();
         }
-    })
+    });
 
 
   function openSortWrapper() {
-    sortSelect.classList.toggle('open');
+    sortSelect.classList.toggle("open");
   }
 
 
-  for (const value of document.querySelectorAll(".sortWrapper__options--value")) {
+  for (const value of document.querySelectorAll(".sortWrapper__options-value")) {
 
     value.setAttribute("tabindex", "0");
 
-    value.addEventListener('click', () => {
-        sortMedias(value)}
-    );
+    value.addEventListener("click", () => {
+        sortMedias(value);
+    });
 
     value.addEventListener("keydown", (e) => {
         console.log(e.code);
@@ -485,12 +512,13 @@ function sortBy(newList) {
         }
     });
     
+    // eslint-disable-next-line no-inner-declarations
     function sortMedias(value) {
 
-        if (!value.classList.contains('selected')) {
-            value.parentNode.querySelector('.sortWrapper__options--value.selected').classList.remove('selected');
-            value.classList.add('selected');
-            value.closest('.sortWrapper__select').querySelector('.sortWrapper__select--trigger span').textContent = value.textContent;
+        if (!value.classList.contains("selected")) {
+            value.parentNode.querySelector(".sortWrapper__options-value.selected").classList.remove("selected");
+            value.classList.add("selected");
+            value.closest(".sortWrapper__select").querySelector(".sortWrapper__select-trigger span").textContent = value.textContent;
             console.log(value.textContent);
         }
 
@@ -500,7 +528,7 @@ function sortBy(newList) {
             }
             const sortPics = newList.sort(function (a, b) {
                 return new Date(a.date) - new Date(b.date);
-            })
+            });
             // galleryContainer.removeChild(childNodes);
 
             console.log(sortPics);
@@ -514,7 +542,7 @@ function sortBy(newList) {
             const sortPics = newList.sort(function (a, b) {
                 return a.title.localeCompare(b.title);
 
-            })
+            });
             // galleryContainer.removeChild(childNodes);
 
             console.log(sortPics);
@@ -528,7 +556,7 @@ function sortBy(newList) {
             const sortPics = newList.sort(function (a, b) {
                 return b.likes - a.likes;
 
-            })
+            });
             // galleryContainer.removeChild(childNodes);
 
             console.log(sortPics);
@@ -537,16 +565,16 @@ function sortBy(newList) {
         }
 
         
-        openLightbox();
+        lightbox();
         liking();
     }
     
   }
 
-  window.addEventListener('click', function(e) {
+  window.addEventListener("click", function(e) {
     // const select = document.querySelector('.custom-select')
     if (!sortSelect.contains(e.target)) {
-        sortSelect.classList.remove('open');
+        sortSelect.classList.remove("open");
     }
   });
 }

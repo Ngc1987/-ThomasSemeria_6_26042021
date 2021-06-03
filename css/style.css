@@ -261,22 +261,22 @@ header #topLink:visited {
   flex-direction: column;
   margin-left: 50px;
 }
-.photographPage__head__descript--name {
+.photographPage__head__descript-name {
   font-size: 64px;
   font-weight: 300;
   margin: 0;
   color: #d3573c;
 }
-.photographPage__head__descript--city {
+.photographPage__head__descript-city {
   font-size: 24px;
   color: #911c1c;
 }
-.photographPage__head__descript--phrase {
+.photographPage__head__descript-phrase {
   font-size: 18px;
   color: #525252;
   margin-top: 15px;
 }
-.photographPage__head__descript--tags {
+.photographPage__head__descript-tags {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
@@ -284,7 +284,7 @@ header #topLink:visited {
   align-items: flex-end;
   margin-top: 15px;
 }
-.photographPage__head__descript--tags a {
+.photographPage__head__descript-tags a {
   color: #911c1c;
   font-size: 18px;
   font-weight: bold;
@@ -296,11 +296,11 @@ header #topLink:visited {
   text-decoration: none;
   transition: all 0.3s ease;
 }
-.photographPage__head__descript--tags a:hover {
+.photographPage__head__descript-tags a:hover {
   color: #fff;
   background: #911c1c;
 }
-.photographPage__head__descript--tags a:focus {
+.photographPage__head__descript-tags a:focus {
   color: #fff;
   background: #911c1c;
 }
@@ -311,14 +311,14 @@ header #topLink:visited {
   position: absolute;
   right: 50px;
 }
-.photographPage__head__id--photo img {
+.photographPage__head__id-photo img {
   width: 200px;
   height: 200px;
   object-fit: cover;
   border-radius: 50%;
   transition: all 0.4s ease;
 }
-.photographPage__head__id--photo img:hover {
+.photographPage__head__id-photo img:hover {
   transform: scale(1.1);
 }
 
@@ -340,10 +340,9 @@ header #topLink:visited {
   top: 0px;
   display: flex;
   flex-direction: column;
-  border: 0 2px solid #394a6d;
   border-radius: 10px;
 }
-.sortWrapper__select--trigger {
+.sortWrapper__select-trigger {
   position: relative;
   display: flex;
   align-items: center;
@@ -355,14 +354,13 @@ header #topLink:visited {
   height: 60px;
   background: #911c1c;
   cursor: pointer;
-  border: 2px 0 solid #911c1c;
   transition: all 0.4s ease;
 }
-.sortWrapper__select--trigger:hover {
+.sortWrapper__select-trigger:hover {
   background: #d3573c;
   color: #000;
 }
-.sortWrapper__select--trigger:focus {
+.sortWrapper__select-trigger:focus {
   background: #d3573c;
   color: #000;
 }
@@ -372,7 +370,6 @@ header #topLink:visited {
   top: 100%;
   left: 0;
   right: 0;
-  border: 2px solid #911c1c;
   border-top: 0;
   background: #911c1c;
   transition: all 0.5s;
@@ -381,7 +378,7 @@ header #topLink:visited {
   pointer-events: none;
   z-index: 2;
 }
-.sortWrapper__options--value {
+.sortWrapper__options-value {
   position: relative;
   display: block;
   padding: 0 22px;
@@ -392,25 +389,25 @@ header #topLink:visited {
   cursor: pointer;
   transition: all 0.5s;
 }
-.sortWrapper__options--value:hover {
+.sortWrapper__options-value:hover {
   cursor: pointer;
   background: #d3573c;
   color: black;
 }
-.sortWrapper__options--value:focus {
+.sortWrapper__options-value:focus {
   background: #d3573c;
   color: #000;
 }
-.sortWrapper__options--value.selected {
+.sortWrapper__options-value.selected {
   color: #fff;
   background: #911c1c;
 }
-.sortWrapper__options--value.selected:hover {
+.sortWrapper__options-value.selected:hover {
   cursor: pointer;
   background: #d3573c;
   color: black;
 }
-.sortWrapper__options--value.selected:focus {
+.sortWrapper__options-value.selected:focus {
   background: #d3573c;
   color: #000;
 }
@@ -511,29 +508,24 @@ header #topLink:visited {
   overflow: hidden;
   text-overflow: ellipsis;
 }
-.gallery__sample__descript--name {
+.gallery__sample__descript-name {
   flex-grow: 3;
   font-weight: 400;
   color: #911c1c;
   font-size: 24px;
+  margin: 0;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
 }
-.gallery__sample__descript--price {
-  font-weight: 500;
-  color: #911c1c;
-  font-size: 24px;
-  margin-right: 15px;
-}
-.gallery__sample__descript--like {
+.gallery__sample__descript-like {
   font-weight: 500;
   font-size: 24px;
   color: #911c1c;
   cursor: pointer;
   align-self: flex-end;
 }
-.gallery__sample__descript--heart {
+.gallery__sample__descript-heart {
   color: #911c1c;
   font-size: 20px;
   padding: 0 5px;
@@ -601,7 +593,7 @@ header #topLink:visited {
 .preview-box.show {
   opacity: 1;
   transform: translate(-50%, -50%) scale(1);
-  pointer-events: auto;
+  pointer-events: all;
   transition: all 0.4s ease;
 }
 
@@ -626,9 +618,6 @@ header #topLink:visited {
   line-height: 50px;
   text-align: center;
   z-index: 3;
-}
-.imgBox__slide:focus {
-  font-size: 55px;
 }
 .imgBox .prev {
   left: -60px;
@@ -695,13 +684,13 @@ header #topLink:visited {
   flex-direction: column;
   position: relative;
 }
-.dialog__box--name, .dialog__box--contact {
+.dialog__box-name, .dialog__box-contact {
   font-weight: 400;
   font-size: 45px;
   margin-top: 20px;
   line-height: 3px;
 }
-.dialog__box--close {
+.dialog__box-close {
   font-size: 30px;
   width: 40px;
   height: 40px;
@@ -712,20 +701,20 @@ header #topLink:visited {
   right: 0;
   border: none;
 }
-.dialog__box--close i {
+.dialog__box-close i {
   color: #fff;
   font-size: 20px;
   font-weight: lighter;
   z-index: 20;
 }
-.dialog__box--modal {
+.dialog__box-modal {
   display: flex;
   flex-direction: column;
 }
-.dialog__box--modal label {
+.dialog__box-modal label {
   font-size: 25px;
 }
-.dialog__box--modal input {
+.dialog__box-modal input {
   width: 100%;
   font-size: 20px;
   height: 40px;
@@ -733,13 +722,13 @@ header #topLink:visited {
   border-radius: 5px;
   margin-top: -20px;
 }
-.dialog__box--modal textarea {
+.dialog__box-modal textarea {
   width: 100%;
   border: none;
   margin-top: -20px;
   border-radius: 5px;
 }
-.dialog__box--modal button {
+.dialog__box-modal button {
   width: 170px;
   height: 70px;
   font-size: 15px;
@@ -780,7 +769,7 @@ header #topLink:visited {
     bottom: 30px;
   }
 
-  .photographPage__head__id--photo {
+  .photographPage__head__id-photo {
     margin-top: -35px;
   }
 }
@@ -823,12 +812,12 @@ header #topLink:visited {
     height: 150px;
   }
 
-  .photographPage__head__id--photo img {
+  .photographPage__head__id-photo img {
     height: 150px;
     width: 150px;
   }
 
-  .photographPage__head__id--photo {
+  .photographPage__head__id-photo {
     margin-top: 0px;
   }
 
@@ -842,16 +831,16 @@ header #topLink:visited {
     z-index: 1;
   }
 
-  .sortWrapper__select--trigger {
+  .sortWrapper__select-trigger {
     height: 40px;
     border-radius: 5px;
   }
 
-  .photographPage__head__descript--name {
+  .photographPage__head__descript-name {
     font-size: 36px;
   }
 
-  .photographPage__head__descript--city {
+  .photographPage__head__descript-city {
     font-size: 13px;
   }
 
@@ -859,11 +848,11 @@ header #topLink:visited {
     background: #fff;
   }
 
-  .photographPage__head__descript--phrase {
+  .photographPage__head__descript-phrase {
     font-size: 13px;
   }
 
-  .photographPage__head__descript--tags a {
+  .photographPage__head__descript-tags a {
     font-size: 13px;
   }
 
@@ -901,16 +890,16 @@ header #topLink:visited {
     width: 100px;
   }
 
-  .photographPage__head__id--photo img {
+  .photographPage__head__id-photo img {
     height: 100px;
     width: 100px;
   }
 
-  .photographPage__head__descript--phrase {
+  .photographPage__head__descript-phrase {
     margin-top: 5px;
   }
 
-  .photographPage__head__descript--tags {
+  .photographPage__head__descript-tags {
     margin-top: 3px;
     margin-left: -5px;
   }
