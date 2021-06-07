@@ -15,6 +15,15 @@ main {
   position: relative;
 }
 
+video::cue {
+  background: #911c1c;
+  color: #fff;
+  font-family: lato;
+  font-size: 14;
+  text-align: center;
+  border-radius: 20px;
+}
+
 header {
   color: #911c1c;
   font-size: 25px;
@@ -486,7 +495,8 @@ header #topLink:visited {
   cursor: pointer;
 }
 .gallery__sample video:hover {
-  transform: scale(1.03) skewX(3deg) skewY(-3deg) translateY(-15px);
+  transform: scale(1.05) skewX(1deg) skewY(-1deg) translateY(-10px);
+  box-shadow: 6px 6px 15px rgba(0, 0, 0, 0.9);
 }
 .gallery__sample img {
   width: 350px;
@@ -497,7 +507,8 @@ header #topLink:visited {
   cursor: pointer;
 }
 .gallery__sample img:hover {
-  transform: scale(1.03) skewX(3deg) skewY(-3deg) translateY(-15px);
+  transform: scale(1.05) skewX(1deg) skewY(-1deg) translateY(-10px);
+  box-shadow: 6px 6px 15px rgba(0, 0, 0, 0.9);
 }
 .gallery__sample__descript {
   display: flex;
@@ -622,8 +633,14 @@ header #topLink:visited {
 .imgBox .prev {
   left: -60px;
 }
+.imgBox .prev:focus {
+  font-size: 50px;
+}
 .imgBox .next {
   right: -60px;
+}
+.imgBox .next:focus {
+  font-size: 50px;
 }
 .imgBox img {
   width: 100%;
@@ -644,9 +661,7 @@ header #topLink:visited {
   right: -40px;
 }
 .imgBox__close:focus {
-  font-size: 55px;
-  color: #d3573c;
-  background: green;
+  font-size: 50px;
 }
 
 .shadow {

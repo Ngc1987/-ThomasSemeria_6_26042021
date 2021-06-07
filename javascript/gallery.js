@@ -7,16 +7,9 @@ const galleryContainer = document.querySelector(".gallery");
 if (params && params.get("id")) {
 
     fetchPhotographer(photographerId).then(function(result) {
-        if(result === undefined) {
-            // const doc = document.querySelector(".js-document");
-            // Prévoir une erreur (Cas de figure si id ne correspond à personne)
-            // const errorMessage = document.createElement("h1");
-            // errorMessage.innerHTML = "L'ID de ce photographe n'existe pas";
-            // doc.appendChild(errorMessage);
-            // console.log(result);
+        if(result == "undefined") {
+            errorMsg();
         } else {
-            // console.log(result);
-
             fetchMediaByPhotographer(photographerId).then(function(mediaList) {
                 // console.log(mediaList);
                 const newList = mediaList.map((element) => {
@@ -34,10 +27,23 @@ if (params && params.get("id")) {
         }
     });
 } else {
-        // Prévoir une erreur (fonction)
+    errorMsg();
 }
 
 
+
+function errorMsg() {
+    const errorDiv = document.querySelector(".js-document");
+    const errorMessage = document.createElement("h1");
+    errorMessage.textContent = "L'ID de ce photographe n'existe pas";
+    errorDiv.appendChild(errorMessage);
+}
+
+
+
+/**
+ * @param  {number} photographerId // Récupère l'ID du photographe pour recueillir ses informations dans notre Json
+ */
 function fetchPhotographer(photographerId) {
 
     return new Promise((resolve, reject) => {
@@ -62,7 +68,7 @@ function fetchPhotographer(photographerId) {
     });
 }
 /**
- * @param  {} photographerId
+ * @param  {number} photographerId // Afficher les informations du photographe dans le header récupérées selon son ID
  */
 function showHeaderPhotograph(photographerId) {
     // eslint-disable-next-line no-undef
@@ -124,7 +130,9 @@ function showHeaderPhotograph(photographerId) {
     }
 }
 
-
+/**
+ * @param  {number} photographerId // Récupère l'ID du photographe cliqué afin de récupérer les médias ayant le même ID
+ */
 function fetchMediaByPhotographer(photographerId) {
 
     return new Promise((resolve) => {
@@ -158,6 +166,7 @@ class Media {
         this.likes = data.likes;
         this.date = data.date;
         this.price = data.price;
+        this.alt = data.alt;
 
         if(data.image) {
 
@@ -185,7 +194,6 @@ class Media {
 
         const descript = document.createElement("section");
         descript.setAttribute("class", "gallery__sample__descript");
-        
 
         const name = document.createElement("h2");
         name.setAttribute("class", "gallery__sample__descript-name");
@@ -193,46 +201,28 @@ class Media {
         name.setAttribute("aria-label", this.title);
         name.setAttribute("tabindex", "0");
 
-        // const price = document.createElement("div");
-        // price.setAttribute("class", "gallery__sample__descript-price");
-        // price.innerHTML = this.price;
-        
-
         const like = document.createElement("section");
         like.setAttribute("class", "gallery__sample__descript-like unliked");
         like.innerHTML = this.likes;
         like.setAttribute("tabindex", "0");
         like.setAttribute("aria-label", "likes");
 
-
         const heart = document.createElement("i");
         heart.setAttribute("class", "fas fa-heart gallery__sample__descript-heart unliked");
-
         
         if(this.source.includes("mp4")) {
             const video = document.createElement("video");
             video.setAttribute("src", "images/photographersImages/"+ this.source);
             video.setAttribute("poster", `images/photographersImages/mini${this.source.replace("mp4", "jpg")}`);
-            // video.setAttribute("aria-label", this.title);
-            video.setAttribute("alt", this.title);
+            video.setAttribute("alt", this.alt);
             video.setAttribute("tabindex", "0");
-            
             imgContainer.appendChild(video);
-
-            const subtitles = document.createElement("track");
-            subtitles.setAttribute("src", `images/photographersImages/${this.source.replace("mp4", "vtt")}`);
-            subtitles.setAttribute("label", "Français");
-            subtitles.setAttribute("kind", "subtitles");
-            subtitles.setAttribute("srclang", "fr");
-            subtitles.setAttribute("default", "");
-            video.appendChild(subtitles);
             const errorMessage = document.createElement("p");
             errorMessage.textContent = "Votre navigateur ne peut pas lire le format de vidéo proposé. Pensez à le mettre à jour";
             video.appendChild(errorMessage);
             console.log(video);
 
             video.onclick = function() {
-                video.setAttribute("controls", "");
                 video.setAttribute("autoplay", "");
             };
         }
@@ -240,15 +230,13 @@ class Media {
         if(this.source.includes("jpg")) {
             const image = document.createElement("img");
             image.setAttribute("src", "images/photographersImages/"+ this.source);  
-            image.setAttribute("alt", this.title);  
-            // image.setAttribute("aria-label", this.title);
+            image.setAttribute("alt", this.alt);  
             image.setAttribute("tabindex", "0");  
             span.appendChild(image);
         }
 
         article.appendChild(imgContainer);
         imgContainer.appendChild(span);
-        
         article.appendChild(descript);
         descript.appendChild(name);
         descript.appendChild(like);
@@ -265,6 +253,7 @@ function lightbox() {
     const gallery = document.querySelectorAll(".gallery__sample img, video"),
     previewBox = document.querySelector(".preview-box"),
     previewImg = previewBox.querySelector("img"),
+    header = document.querySelector("header"),
     closeIcon = previewBox.querySelector(".imgBox__close"),
     currentImg = previewBox.querySelector(".current-img"),
     shadow = document.querySelector(".shadow");// Une fois la fenêtre chargée
@@ -284,26 +273,43 @@ function lightbox() {
 
             previewBox.setAttribute("aria-hidden", false);
             // eslint-disable-next-line no-undef
-            doc.setAttribute("aria-hidden", true);
+            doc.setAttribute("aria-hidden", "true");
+            header.setAttribute("aria-hidden", "true");
+            prevBtn.setAttribute("tabindex", "0");
+            nextBtn.setAttribute("tabindex", "0");
+            closeIcon.setAttribute("tabindex", "0");
+            // closeIcon.focus();
 
             // prevBtn.focus();  
             clickImgIndex = newIndex; // On passe l'index de l'image cliquée à la variable clickImgIndex
             // currentImg.children[0].remove();
+            const video = document.createElement("video");
 
             function preview() { 
                 let selectedItemUrl = gallery[newIndex].src; // Obtenir l'url de l'image cliquée
                 previewImg.src = selectedItemUrl; // Passe la source de l'image cliquée dans la lightbox
+
                 console.log(selectedItemUrl);
                 console.log(currentImg.children[0]);
 
+                
+                
+
                 if(selectedItemUrl.includes("mp4")) {
                     currentImg.children[0].remove();
-                    const video = document.createElement("video");
+                    
                     const error = document.createElement("p");
                     error.innerHTML = "Votre navigateur ne prend pas en charge ce format de vidéo. Pensez à le mettre à jour";
+                    const subtitles = document.createElement("track");
+                    subtitles.setAttribute("src", `${selectedItemUrl.replace("mp4", "vtt")}`);
+                    subtitles.setAttribute("label", "Français");
+                    subtitles.setAttribute("kind", "subtitles");
+                    subtitles.setAttribute("srclang", "fr");
+                    subtitles.setAttribute("default", "");
                     video.setAttribute("src", selectedItemUrl);
                     video.setAttribute("autoplay", "");
                     video.setAttribute("controls", "");
+                    video.appendChild(subtitles);
                     video.appendChild(error);
                     currentImg.appendChild(video);
                 }
@@ -348,7 +354,7 @@ function lightbox() {
                 previewBox.setAttribute("aria-hidden", true);
                 // eslint-disable-next-line no-undef
                 doc.setAttribute("aria-hidden", false);
-
+                video.removeAttribute("autoplay");
                 previewBox.classList.remove("show");
                 prevBtn.style.display = "block";
                 nextBtn.style.display = "block";
@@ -503,12 +509,14 @@ function sortBy(newList) {
 
     value.addEventListener("click", () => {
         sortMedias(value);
+        sortButton.focus();
     });
 
     value.addEventListener("keydown", (e) => {
         console.log(e.code);
         if(e.code == "NumpadEnter") {
             sortMedias(value);
+            sortButton.focus();
         }
     });
     
@@ -533,6 +541,7 @@ function sortBy(newList) {
 
             console.log(sortPics);
             showGallery(sortPics);
+            sortButton.focus();
 
         }
         if(value.textContent == "Titre") {
@@ -547,6 +556,7 @@ function sortBy(newList) {
 
             console.log(sortPics);
             showGallery(sortPics);
+            sortButton.focus();
 
         }
         if(value.textContent == "Popularité") {
@@ -561,6 +571,7 @@ function sortBy(newList) {
 
             console.log(sortPics);
             showGallery(sortPics);
+            sortButton.focus();
 
         }
 

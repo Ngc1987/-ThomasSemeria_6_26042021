@@ -18,7 +18,8 @@ submitBtn.onclick = function(e) {
 // Récupérer les composants de type aria-haspopup="dialog" d1 document
 // ainsi que les fenêtres modales liées
 const triggers = document.querySelectorAll("[aria-haspopup='dialog']");
-const doc = document.querySelector(".js-document");
+const doc = document.querySelector(".js-document"),
+      header = document.querySelector("header");
 // Selection de tous les éléments focalisables de la modale
 const focusableElementsArray = [
   "[href]",
@@ -35,13 +36,14 @@ const keyCodes = {
 };
 // Fonction open qui passe l'attribut aria-hidden à false pour 
 // pouvoir afficher la modale et désactiver le document principal
-  const open = function (dialog) {
+const open = function (dialog) {
   const focusableElements = dialog.querySelectorAll(focusableElementsArray);
   const firstFocusableElement = focusableElements[0];
   const lastFocusableElement = focusableElements[focusableElements.length - 1];
 
   dialog.setAttribute("aria-hidden", false);
   doc.setAttribute("aria-hidden", true);
+  header.setAttribute("aria-hidden", true);
 
   // return si pas d'élément focusable
   if (!firstFocusableElement) {

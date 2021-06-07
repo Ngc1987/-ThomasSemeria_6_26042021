@@ -16,6 +16,15 @@ main {
     position: relative;
 }
 
+video::cue { 
+    background: #911c1c;
+    color: #fff;
+    font-family: lato;
+    font-size: 14;
+    text-align: center;
+    border-radius: 20px; 
+}
+
 header {
     color: $primary;
     font-size: 25px;
@@ -603,7 +612,8 @@ header {
             cursor: pointer;
 
             &:hover {
-                transform: scale(1.03) skewX(3deg) skewY(-3deg) translateY(-15px);
+                transform: scale(1.05) skewX(1deg) skewY(-1deg) translateY(-10px);
+                box-shadow: 6px 6px 15px rgba(0,0,0,0.9);
             }
         }
 
@@ -616,8 +626,10 @@ header {
             cursor: pointer;
 
             &:hover {
-                transform: scale(1.03) skewX(3deg) skewY(-3deg) translateY(-15px);
+                transform: scale(1.05) skewX(1deg) skewY(-1deg) translateY(-10px);
+                box-shadow: 6px 6px 15px rgba(0,0,0,0.9);
             }
+            
         }
 
         &__descript {
@@ -827,9 +839,17 @@ header {
 
     .prev {
         left: -60px;
+
+        &:focus {
+            font-size: 50px;
+        }
     }
     .next {
         right: -60px;
+
+        &:focus {
+            font-size: 50px;
+        }
     }
 
     img {
@@ -854,9 +874,7 @@ header {
         right: -40px;
 
         &:focus {
-            font-size: 55px;
-            color: $secondary;
-            background: green;
+            font-size: 50px;
         }
     }
 
