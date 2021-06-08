@@ -157,7 +157,8 @@ const validPrenom = function (inputPrenom) {
       prenomErreur.innerHTML ="";
       return true;
   } else {
-      prenomErreur.innerHTML = "Veuillez saisir uniquement des lettres et 2 caractères minimum";
+      prenomErreur.innerHTML = "Saisissez uniquement des lettres et 2 caractères minimum";
+      prenomErreur.classList.add("errorAnim");
       return false;
   }
 };
@@ -181,7 +182,8 @@ const validNom = function (inputNom) {
       nomErreur.innerHTML = "";
       return true;
   } else {
-      nomErreur.innerHTML = "Veuillez saisir uniquement des lettres et 2 caractères minimum";
+      nomErreur.innerHTML = "Saisissez uniquement des lettres et 2 caractères minimum";
+      nomErreur.classList.add("errorAnim");
       return false;
   }
 };
@@ -205,8 +207,6 @@ const validEmail = function (inputEmail) {
   let testEmail = emailRegExp.test(inputEmail.value);
   // console.log(inputEmail.value); 
 
-  console.log(validEmail);
-
   // Si la valeur saisie dans l'input respecte les règles de la RegExp, testEmail vaut "true"
   // Donc si testEmail est true, on renvoie true, sinon on renvoie false et fait apparaître
   // un message d'erreur
@@ -215,6 +215,7 @@ const validEmail = function (inputEmail) {
       return true;
   } else {
       emailErreur.innerHTML = "Email invalide";
+      emailErreur.classList.add("errorAnim");
       return false;
   }
 };

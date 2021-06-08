@@ -47,9 +47,9 @@ header #tags {
   flex-wrap: wrap;
   justify-content: center;
   align-items: center;
-  margin-right: 20px;
+  margin-left: 20px;
 }
-header span a {
+header span h4 {
   color: #911c1c;
   font-size: 12px;
   font-weight: bold;
@@ -61,11 +61,11 @@ header span a {
   transition: all 0.3s ease;
   text-decoration: none;
 }
-header span a:hover {
+header span h4:hover {
   color: #fff;
   background: #911c1c;
 }
-header span a:focus {
+header span h4:focus {
   color: #fff;
   background: #911c1c;
 }
@@ -167,6 +167,7 @@ header #topLink:visited {
   color: #d3573c;
   font-size: 36px;
   margin-top: 20px;
+  margin-bottom: 0;
   font-weight: 400;
   cursor: pointer;
 }
@@ -179,11 +180,16 @@ header #topLink:visited {
 }
 .photographItem__descript__city {
   color: #911c1c;
-  font-size: 13px;
+  font-size: 17px;
+  font-weight: 400;
+  margin: 0;
 }
 .photographItem__descript__phrase {
   margin-top: 3px;
   font-size: 11px;
+  font-weight: 400;
+  margin: 0;
+  margin-top: 5px;
 }
 .photographItem__descript__price {
   margin-top: 5px;
@@ -201,9 +207,8 @@ header #topLink:visited {
   align-items: center;
   justify-content: center;
   flex-wrap: wrap;
-  margin-top: 15px;
 }
-.photographItem__tags span {
+.photographItem__tags h4 {
   color: #911c1c;
   font-size: 12px;
   font-weight: bold;
@@ -214,11 +219,11 @@ header #topLink:visited {
   cursor: pointer;
   transition: all 0.3s ease;
 }
-.photographItem__tags span:hover {
+.photographItem__tags h4:hover {
   color: #fff;
   background: #911c1c;
 }
-.photographItem__tags span:focus {
+.photographItem__tags h4:focus {
   color: #fff;
   background: #911c1c;
 }
@@ -279,11 +284,15 @@ header #topLink:visited {
 .photographPage__head__descript-city {
   font-size: 24px;
   color: #911c1c;
+  margin: 0;
+  font-weight: 400;
 }
 .photographPage__head__descript-phrase {
   font-size: 18px;
   color: #525252;
+  margin: 0;
   margin-top: 15px;
+  font-weight: 400;
 }
 .photographPage__head__descript-tags {
   display: flex;
@@ -357,7 +366,7 @@ header #topLink:visited {
   align-items: center;
   justify-content: space-between;
   padding: 0 22px;
-  font-size: 20px;
+  font-size: 16px;
   font-weight: 400;
   color: #fff;
   height: 60px;
@@ -386,6 +395,9 @@ header #topLink:visited {
   visibility: hidden;
   pointer-events: none;
   z-index: 2;
+}
+.sortWrapper__options .white {
+  border-top: 1px solid white;
 }
 .sortWrapper__options-value {
   position: relative;
@@ -429,35 +441,35 @@ header #topLink:visited {
 
 .arrow {
   position: relative;
-  height: 15px;
-  width: 15px;
+  height: 14px;
+  width: 7px;
 }
 .arrow::before, .arrow::after {
   content: "";
   position: absolute;
   bottom: 0px;
-  width: 0.15rem;
+  width: 0.2rem;
   height: 100%;
   transition: all 0.5s;
 }
 .arrow::before {
-  left: -5px;
+  left: -4px;
   transform: rotate(45deg);
   background-color: #fff;
 }
 .arrow::after {
-  left: 5px;
+  left: 4px;
   transform: rotate(-45deg);
   background-color: #fff;
 }
 
 .open .arrow::before {
-  left: -5px;
+  left: -4px;
   transform: rotate(-45deg);
 }
 
 .open .arrow::after {
-  left: 5px;
+  left: 4px;
   transform: rotate(45deg);
 }
 
@@ -496,7 +508,7 @@ header #topLink:visited {
 }
 .gallery__sample video:hover {
   transform: scale(1.05) skewX(1deg) skewY(-1deg) translateY(-10px);
-  box-shadow: 6px 6px 15px rgba(0, 0, 0, 0.9);
+  box-shadow: 0 0 4px #c4c4c4, 0 0 8px #c4c4c4, 0 0 12px #c4c4c4, 0 0 17px #c4c4c4, 0 0 23px #c4c4c4, 0 0 30px #c4c4c4;
 }
 .gallery__sample img {
   width: 350px;
@@ -505,10 +517,11 @@ header #topLink:visited {
   border-radius: 5px;
   transition: all 0.4s ease;
   cursor: pointer;
+  z-index: -1000;
 }
 .gallery__sample img:hover {
   transform: scale(1.05) skewX(1deg) skewY(-1deg) translateY(-10px);
-  box-shadow: 6px 6px 15px rgba(0, 0, 0, 0.9);
+  box-shadow: 0 0 5px #c4c4c4, 0 0 9px #c4c4c4, 0 0 14px #c4c4c4, 0 0 21px #c4c4c4, 0 0 30px #c4c4c4;
 }
 .gallery__sample__descript {
   display: flex;
@@ -576,6 +589,7 @@ header #topLink:visited {
   right: 0;
   border-top-left-radius: 5px;
   border-top-right-radius: 5px;
+  z-index: 50;
 }
 .likeAndPrice__like {
   font-weight: 500;
@@ -772,10 +786,26 @@ header #topLink:visited {
 }
 
 .error {
-  color: #911c1c;
-  font-size: 15px;
+  color: red;
+  font-size: 18px;
+  margin-top: 2px;
 }
 
+.errorAnim {
+  animation: errorAnim 3s ease infinite;
+}
+
+@keyframes errorAnim {
+  0% {
+    color: #911c1c;
+  }
+  30% {
+    color: red;
+  }
+  100% {
+    color: #911c1c;
+  }
+}
 @media (max-width: 1040px) {
   .contact {
     max-height: 35px;

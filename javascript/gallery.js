@@ -37,6 +37,7 @@ function errorMsg() {
     const errorMessage = document.createElement("h1");
     errorMessage.textContent = "L'ID de ce photographe n'existe pas";
     errorDiv.appendChild(errorMessage);
+    "L'ID de ce photographe n'existe pas"
 }
 
 
@@ -115,7 +116,7 @@ function showHeaderPhotograph(photographerId) {
             // eslint-disable-next-line no-undef
             photographerPortrait.setAttribute("src", `images/Photographs/${photographers[i].portrait}`);
             // eslint-disable-next-line no-undef
-            photographerPortrait.setAttribute("aria-label", photographers[i].name);
+            photographerPortrait.setAttribute("alt", `Photo de profil de ${photographers[i].name}`);
             photographerPortrait.setAttribute("tabindex", "0");
             photo.appendChild(photographerPortrait);
 
@@ -201,7 +202,7 @@ class Media {
         name.setAttribute("aria-label", this.title);
         name.setAttribute("tabindex", "0");
 
-        const like = document.createElement("section");
+        const like = document.createElement("h3");
         like.setAttribute("class", "gallery__sample__descript-like unliked");
         like.innerHTML = this.likes;
         like.setAttribute("tabindex", "0");
@@ -216,9 +217,16 @@ class Media {
             video.setAttribute("poster", `images/photographersImages/mini${this.source.replace("mp4", "jpg")}`);
             video.setAttribute("alt", this.alt);
             video.setAttribute("tabindex", "0");
+            const subtitles = document.createElement("track");
+                    subtitles.setAttribute("src", `images/photographersImages/${this.source.replace("mp4", "vtt")}`);
+                    subtitles.setAttribute("label", "Français");
+                    subtitles.setAttribute("kind", "subtitles");
+                    subtitles.setAttribute("srclang", "fr");
+                    subtitles.setAttribute("default", "");
             imgContainer.appendChild(video);
             const errorMessage = document.createElement("p");
             errorMessage.textContent = "Votre navigateur ne peut pas lire le format de vidéo proposé. Pensez à le mettre à jour";
+            video.appendChild(subtitles);
             video.appendChild(errorMessage);
             console.log(video);
 
@@ -509,14 +517,14 @@ function sortBy(newList) {
 
     value.addEventListener("click", () => {
         sortMedias(value);
-        sortButton.focus();
+        sortSelect.focus();
     });
 
     value.addEventListener("keydown", (e) => {
         console.log(e.code);
         if(e.code == "NumpadEnter") {
             sortMedias(value);
-            sortButton.focus();
+            sortSelect.focus();
         }
     });
     
@@ -526,7 +534,7 @@ function sortBy(newList) {
         if (!value.classList.contains("selected")) {
             value.parentNode.querySelector(".sortWrapper__options-value.selected").classList.remove("selected");
             value.classList.add("selected");
-            value.closest(".sortWrapper__select").querySelector(".sortWrapper__select-trigger span").textContent = value.textContent;
+            value.closest(".sortWrapper__select").querySelector(".sortWrapper__select-trigger h3").textContent = value.textContent;
             console.log(value.textContent);
         }
 
@@ -541,7 +549,7 @@ function sortBy(newList) {
 
             console.log(sortPics);
             showGallery(sortPics);
-            sortButton.focus();
+            sortSelect.focus();
 
         }
         if(value.textContent == "Titre") {
@@ -556,7 +564,7 @@ function sortBy(newList) {
 
             console.log(sortPics);
             showGallery(sortPics);
-            sortButton.focus();
+            sortSelect.focus();
 
         }
         if(value.textContent == "Popularité") {
@@ -571,13 +579,14 @@ function sortBy(newList) {
 
             console.log(sortPics);
             showGallery(sortPics);
-            sortButton.focus();
+            sortSelect.focus();
 
         }
 
         
         lightbox();
         liking();
+        sortWrapper.focus();
     }
     
   }
@@ -586,6 +595,7 @@ function sortBy(newList) {
     // const select = document.querySelector('.custom-select')
     if (!sortSelect.contains(e.target)) {
         sortSelect.classList.remove("open");
+        sortWrapper.focus();
     }
   });
 }

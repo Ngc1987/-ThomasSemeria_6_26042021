@@ -12,17 +12,18 @@
 <body>
 
     <header>
-        <a href="index.html" aria-label="Logo Fisheye et lien vers page d'accueil"><div id="logo" title="Lien vers page d'accueil"></div></a>
+        <a href="#logo" id="topLink" class="hide" tabindex="0" aria-label="Revenir en tête de page">Passer au contenu</a>
+        <a href="index.html" title="Logo Fisheye et lien vers page d'accueil"><div id="logo"></div></a>
     </header>
 
 
     <main class="js-document">
             <article class="photographPage__head">
                 <section class="photographPage__head__descript">
-                    <h1 class="photographPage__head__descript-name"></h1>
+                    <h1 class="photographPage__head__descript-name">Mimi Keel</h1>
                     <div tabindex="0">
-                        <div class="photographPage__head__descript-city"></div>
-                        <div class="photographPage__head__descript-phrase"></div>
+                        <h2 class="photographPage__head__descript-city">Nice</h2>
+                        <h3 class="photographPage__head__descript-phrase">Bla bla bla blaaaaa</h3>
                     </div>
                     <div class="photographPage__head__descript-tags"></div>
                 </section>
@@ -33,20 +34,20 @@
                 </section>
             </article>
             <aside class="likeAndPrice">
-                <section class="likeAndPrice__like"></section>
-                <section class="likeAndPrice__price"></section>
+                <h3 class="likeAndPrice__like"></h3>
+                <h3 class="likeAndPrice__price"></h3>
             </aside>
 
         <article class="sortWrapper">
             <section tabindex="0" id="sortby">Trier par</section>
             <section class="sortWrapper__select" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="sortby" tabindex="0">
-                <div class="sortWrapper__select-trigger"  role="button"><span>Popularité</span>
+                <div class="sortWrapper__select-trigger"  role="button"><h3>Popularité</h3>
                     <div class="arrow"></div>
                 </div>
                 <div class="sortWrapper__options">
-                    <span class="sortWrapper__options-value selected" data-value="popularite" tabindex="-1">Popularité</span>
-                    <span class="sortWrapper__options-value" data-value="date" tabindex="-1">Date</span>
-                    <span class="sortWrapper__options-value" data-value="titre" tabindex="-1">Titre</span>
+                    <h3 class="sortWrapper__options-value selected" data-value="popularite" tabindex="-1">Popularité</h3>
+                    <h3 class="sortWrapper__options-value white" data-value="date" tabindex="-1">Date</h3>
+                    <h3 class="sortWrapper__options-value white" data-value="titre" tabindex="-1">Titre</h3>
                 </div>
             </section>
         </article>
@@ -56,18 +57,18 @@
 
         <div class="preview-box" aria-hidden="true" role="dialog">
             <section class="imgBox">
-                <section class="imgBox__slide prev">
+                <div class="imgBox__slide prev">
                     <i class="fas fa-chevron-left"></i>
-                </section>
-                <section class="imgBox__slide next">
+                </div>
+                <div class="imgBox__slide next">
                     <i class="fas fa-chevron-right"></i>
-                </section>
-                <section class="current-img">
+                </div>
+                <div class="current-img">
                     <img src="images/photographersImages/Travel_Lonesome.jpg" alt="">
-                </section>
-                <section>
+                </div>
+                <div>
                 <i class="imgBox__close fas fa-times"></i>
-            </section>
+                </div>
             </section>
         </div>
         <div class="shadow">
@@ -77,7 +78,7 @@
     <div id="dialog" role="dialog" aria-label="Formulaire de contact" aria-modal="true" aria-hidden="true" tabindex="-1" class="dialog">
         <div role="document" class="dialog__box">
             <h2 class="dialog__box-name">Contactez-moi</h2>
-            <h2 class="dialog__box-contact"></h2>
+            <h2 class="dialog__box-contact">Mimi Keel</h2>
             <button type="button" aria-label="Fermer" title="Fermer cette fenêtre modale" data-dismiss="dialog" class="dialog__box-close">X</button>
 
             <form action="." method="POST" class="dialog__box-modal" id="formulaire">
@@ -100,6 +101,7 @@
             </form>
         </div>
     </div>
+    <script src="javascript/scrollbutton.js"></script>
     <script src="javascript/modale.js"></script>
     <script src="javascript/gallery.js"></script>
   
