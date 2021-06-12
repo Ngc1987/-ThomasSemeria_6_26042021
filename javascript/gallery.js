@@ -167,7 +167,7 @@ class Media {
         this.likes = data.likes;
         this.date = data.date;
         this.price = data.price;
-        this.alt = data.alt;
+        this.alt-text = data.alt;
 
         if(data.image) {
 
@@ -215,7 +215,7 @@ class Media {
             const video = document.createElement("video");
             video.setAttribute("src", "images/photographersImages/"+ this.source);
             video.setAttribute("poster", `images/photographersImages/mini${this.source.replace("mp4", "jpg")}`);
-            video.setAttribute("alt", this.alt);
+            video.setAttribute("alt", this.alt-text);
             video.setAttribute("tabindex", "0");
             const subtitles = document.createElement("track");
                     subtitles.setAttribute("src", `images/photographersImages/${this.source.replace("mp4", "vtt")}`);
@@ -238,7 +238,7 @@ class Media {
         if(this.source.includes("jpg")) {
             const image = document.createElement("img");
             image.setAttribute("src", "images/photographersImages/"+ this.source);  
-            image.setAttribute("alt", this.alt);  
+            image.setAttribute("alt", this.alt-text);  
             image.setAttribute("tabindex", "0");  
             span.appendChild(image);
         }
