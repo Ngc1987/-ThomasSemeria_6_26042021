@@ -73,8 +73,8 @@ function fetchPhotographer(photographerId) {
  */
 function showHeaderPhotograph(photographerId) {
     // eslint-disable-next-line no-undef
-    console.log(photographData.photographers);
-    console.log(photographerId);
+    // console.log(photographData.photographers);
+    // console.log(photographerId);
     // eslint-disable-next-line no-undef
     const photographers = photographData.photographers;
     // eslint-disable-next-line no-undef
@@ -228,7 +228,7 @@ class Media {
             errorMessage.textContent = "Votre navigateur ne peut pas lire le format de vidéo proposé. Pensez à le mettre à jour";
             video.appendChild(subtitles);
             video.appendChild(errorMessage);
-            console.log(video);
+            // console.log(video);
 
             video.onclick = function() {
                 video.setAttribute("autoplay", "");
