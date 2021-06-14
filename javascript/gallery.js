@@ -37,7 +37,7 @@ function errorMsg() {
     const errorMessage = document.createElement("h1");
     errorMessage.textContent = "L'ID de ce photographe n'existe pas";
     errorDiv.appendChild(errorMessage);
-    "L'ID de ce photographe n'existe pas"
+    "L'ID de ce photographe n'existe pas";
 }
 
 
@@ -167,7 +167,7 @@ class Media {
         this.likes = data.likes;
         this.date = data.date;
         this.price = data.price;
-        this.alt-text = data.alt;
+        this.altText = data.altText;
 
         if(data.image) {
 
@@ -215,7 +215,7 @@ class Media {
             const video = document.createElement("video");
             video.setAttribute("src", "images/photographersImages/"+ this.source);
             video.setAttribute("poster", `images/photographersImages/mini${this.source.replace("mp4", "jpg")}`);
-            video.setAttribute("alt", this.alt-text);
+            video.setAttribute("alt", this.altText);
             video.setAttribute("tabindex", "0");
             const subtitles = document.createElement("track");
                     subtitles.setAttribute("src", `images/photographersImages/${this.source.replace("mp4", "vtt")}`);
@@ -238,7 +238,7 @@ class Media {
         if(this.source.includes("jpg")) {
             const image = document.createElement("img");
             image.setAttribute("src", "images/photographersImages/"+ this.source);  
-            image.setAttribute("alt", this.alt-text);  
+            image.setAttribute("alt", this.altText);  
             image.setAttribute("tabindex", "0");  
             span.appendChild(image);
         }
