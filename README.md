@@ -1,5 +1,4 @@
-# Projet 6 de la formation développeur Front-End
-## OpenClassRooms
+## FishEye
 
 ![Logo Fisheye](svg/logo.svg)
 
@@ -26,13 +25,3 @@ plonger réellement dans ce nouveau langage.
   disponibles pour chaque langage.
 - Aucun framework autorisé, codage en JS natif.
 
-
-Les principales difficultés rencontrées ont été le manque de connaissance encore logique du langage
-Javascript. Ses nombreuses possibilités et méthodes étant loin d'être connues à l'heure actuelle, il m'a
-fallu pas mal de temps et de recherches pour réussir à mettre en place les différentes fonctions
-nécessaires à la réalisation de ce projet.
-
-Mais quand on arrive à nos fins, les difficultés ne sont plus qu'un lointain souvenir, et
-la satisfaction d'y arriver et d'avoir appris de nouvelles choses prédomine.
-
-Maintenant, place au projet 7 !!!
