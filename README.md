@@ -9,10 +9,6 @@ ses différentes photos et vidéos.
 L'accessibilité était aussi au coeur du projet, ce site devant être navigable grâce au clavier de
 l'utilisateur, ou à l'aide de technologies d'assistance telles qu'un lecteur d'écran.
 
-Le HTML et le CSS ont été très simples à mettre en place et à structurer, le design du site étant assez
-simpliste. Les difficultés ont surtout porté sur le Javascript, ce projet étant le premier à nous
-plonger réellement dans ce nouveau langage.
-
 
 ### Les consignes étaient dans les grandes lignes les suivantes:
 
